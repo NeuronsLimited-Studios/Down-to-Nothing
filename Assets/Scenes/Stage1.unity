@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StarMovementScript
   speed: 12
+  acceleration: 60
+  deceleration: 50
 --- !u!50 &716960348
 Rigidbody2D:
   serializedVersion: 5
