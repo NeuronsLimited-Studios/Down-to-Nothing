@@ -101,7 +101,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250681155652838418}
-  - component: {fileID: 1183399324627696613}
   - component: {fileID: 7929332391379973579}
   m_Layer: 0
   m_Name: Planet3
@@ -126,18 +125,6 @@ Transform:
   - {fileID: 4218144843092649429}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183399324627696613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191672107043094250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 466c9d91a52cb4941a9a8c3033bcea6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!58 &7929332391379973579
 CircleCollider2D:
   m_ObjectHideFlags: 0
