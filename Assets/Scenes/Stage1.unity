@@ -581,7 +581,7 @@ MonoBehaviour:
   BlackHole: {fileID: 6955972456498805342, guid: c35ed95cd21f9c14494892d4bdcf7486, type: 3}
   startingPosX: 0
   startingPosY: 0
-  mapSize: 1000
+  mapSize: 1500
   spawnAmount: 150
 --- !u!1 &1310454271
 GameObject:
