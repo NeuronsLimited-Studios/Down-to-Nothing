@@ -6,7 +6,7 @@
 
 ![Unity](https://img.shields.io/badge/Unity-6000.6.0f1-black?logo=unity)
 ![Render Pipeline](https://img.shields.io/badge/render-URP%202D-blue)
-![Input](https://img.shields.io/badge/input-New%20Input%20System-blueviolet)
+![Input](https://img.shields.io/badge/input-both%20Input%20System-blueviolet)
 ![Status](https://img.shields.io/badge/status-concept-orange)
 
 ---
