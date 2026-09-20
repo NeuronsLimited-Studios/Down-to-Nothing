@@ -79,7 +79,7 @@ Gli stadi intermedi e il gameplay di ciascuno sono ancora da decidere.
 
 - **Unity** 6000.6.0f1
 - **Universal Render Pipeline** 17.6.0 (2D Renderer)
-- **New Input System** (`Assets/Settings/InputSystem_Actions.inputactions`)
+- **Both Input Systems** (`Assets/Settings/InputSystem_Actions.inputactions`)
 - Pacchetti 2D: Animation, Aseprite importer, PSD importer, SpriteShape, Tilemap (+ Extras)
 - Timeline, uGUI
 
