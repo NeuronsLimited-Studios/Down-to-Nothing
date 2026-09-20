@@ -15,41 +15,52 @@ public class SpawnerScript : MonoBehaviour
     public float startingPosX = 0f;
     public float startingPosY = 0f;
 
-    public float spawnDistance = 20f;
+    public float mapSize = 1000f;
+    public int spawnAmount = 150;
 
     List<Vector3> spawnedPositions = new List<Vector3>();
 
     void Start()
     {
-        startingPosX = startingPosX + Random.Range(-100f, 100f);
-        startingPosY = startingPosY + Random.Range(-100f, 100f);
+        List<Vector2> spawnPositions = new List<Vector2>();
 
-        for (int i = 0; i < 50; i++)
+        int gridSize = Mathf.CeilToInt(Mathf.Sqrt(spawnAmount));
+
+        float cellSize = mapSize / gridSize;
+
+        for (int x = 0; x < gridSize; x++)
         {
-            Vector3 spawnPosition = new Vector3(startingPosX, startingPosY, 0f);
-
-            bool positionFree = false;
-
-            while (!positionFree)
+            for (int y = 0; y < gridSize; y++)
             {
-                positionFree = true;
+                if (spawnPositions.Count >= spawnAmount)
+                    break;
 
-                foreach (Vector3 position in spawnedPositions)
-                {
-                    if (Vector3.Distance(spawnPosition, position) < spawnDistance)
-                    {
-                        positionFree = false;
+                float posX = startingPosX - mapSize / 2f + (x + 0.5f) * cellSize;
+                float posY = startingPosY - mapSize / 2f + (y + 0.5f) * cellSize;
 
-                        spawnPosition = new Vector3(
-                            startingPosX + Random.Range(-100f, 100f),
-                            startingPosY + Random.Range(-100f, 100f),
-                            0f
-                        );
+                posX += Random.Range(-cellSize / 3f, cellSize / 3f);
+                posY += Random.Range(-cellSize / 3f, cellSize / 3f);
 
-                        break;
-                    }
-                }
+                spawnPositions.Add(new Vector2(posX, posY));
             }
+        }
+
+        for (int i = 0; i < spawnPositions.Count; i++)
+        {
+            int randomPosition = Random.Range(i, spawnPositions.Count);
+
+            Vector2 temp = spawnPositions[i];
+            spawnPositions[i] = spawnPositions[randomPosition];
+            spawnPositions[randomPosition] = temp;
+        }
+
+        for (int i = 0; i < spawnAmount; i++)
+        {
+            Vector3 spawnPosition = new Vector3(
+                spawnPositions[i].x,
+                spawnPositions[i].y,
+                0f
+            );
 
             int random = Random.Range(0, 7);
 
@@ -92,9 +103,6 @@ public class SpawnerScript : MonoBehaviour
             }
 
             spawnedPositions.Add(spawnPosition);
-
-            startingPosX = startingPosX + Random.Range(-100f, 100f);
-            startingPosY = startingPosY + Random.Range(-100f, 100f);
         }
     }
 

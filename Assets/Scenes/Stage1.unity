@@ -365,6 +365,61 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 83.52946, y: 43.050705}
   m_EdgeRadius: 0
+--- !u!1 &1299726579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299726580}
+  - component: {fileID: 1299726581}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299726580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299726579}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3111, y: 9.24779, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299726581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299726579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466c9d91a52cb4941a9a8c3033bcea6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerScript
+  Planet1: {fileID: 8373450608912334686, guid: a9c9a02ca1220d84084bab5aa8d41ddf, type: 3}
+  Planet2: {fileID: 3186221835437780737, guid: edc8775d2bc8da241b2d092788cb822a, type: 3}
+  Planet3: {fileID: 5191672107043094250, guid: b73769744a8c9cc4c8d44d30bf2b94fd, type: 3}
+  Planet4: {fileID: 6541263728499112082, guid: c9efb84aea9cc3e45a11424ca2c51339, type: 3}
+  Planet5: {fileID: 6216539672331371546, guid: b00181100f12b584ba8691d5ab7f32a4, type: 3}
+  Planet6: {fileID: 295314942196503719, guid: 5b2117badb1eb8042a45535e52e33bec, type: 3}
+  BlackHole: {fileID: 6955972456498805342, guid: c35ed95cd21f9c14494892d4bdcf7486, type: 3}
+  startingPosX: 0
+  startingPosY: 0
+  mapSize: 1000
+  spawnAmount: 150
 --- !u!1 &1310454271
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,3 +564,4 @@ SceneRoots:
   - {fileID: 1310454274}
   - {fileID: 716960346}
   - {fileID: 1052580282}
+  - {fileID: 1299726580}
