@@ -121,6 +121,9 @@ public class PlanetScript : MonoBehaviour
         dust.transform.SetParent(null);                 //The dust has to outlive the planet
         Destroy(dust.gameObject, dustLifetime + 0.5f);
         Destroy(gameObject);
+
+        if (StageScript.Instance != null)
+            StageScript.Instance.PlanetHit();
     }
 
     void Emit(Vector2 position, int count, float spread)
