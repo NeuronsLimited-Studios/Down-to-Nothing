@@ -105,9 +105,4 @@ public class SpawnerScript : MonoBehaviour
             spawnedPositions.Add(spawnPosition);
         }
     }
-
-    void Update()
-    {
-
-    }
 }
