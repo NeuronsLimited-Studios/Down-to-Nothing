@@ -15,7 +15,7 @@ public class SpawnerScript : MonoBehaviour
     public float startingPosX = 0f;
     public float startingPosY = 0f;
 
-    public float mapSize = 1000f;
+    public float mapSize = 100f;
     public int spawnAmount = 150;
 
     List<Vector3> spawnedPositions = new List<Vector3>();
