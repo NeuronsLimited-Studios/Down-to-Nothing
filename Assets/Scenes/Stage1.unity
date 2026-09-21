@@ -789,16 +789,17 @@ MonoBehaviour:
   limitBreak:
     sound: {fileID: 8300000, guid: 3be3d88cd8670074682021cc45a0fa69, type: 3}
     words:
-    - BREAK
+    - REACH
     - THE
     - LIMIT
     wordTimes:
     - 0.08
     - 0.86
     - 1.26
+    slam: 0.25
+    shake: 25
     duration: 2.6
-    accumulate: 1
-    fontSize: 170
+    fontSize: 400
 --- !u!4 &671735518
 Transform:
   m_ObjectHideFlags: 0
