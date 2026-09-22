@@ -5,9 +5,9 @@ public class StageScript : MonoBehaviour
     public static StageScript Instance;
 
     [Header("Bar")]
-    public float startProgress = 0.25f;     //How full the bar is when the stage starts
-    public float blackHoleGain = 0.08f;     //How much a black hole fills the bar
-    public float planetPenalty = 0.02f;     //How much a planet that hits the star empties it
+    public float startProgress = 0f;     //How full the bar is when the stage starts
+    public float gain = 0.08f;
+    public float penalty = 0.02f;
 
     [Header("Star size")]
     public float sizeWhenEmpty = 1.1f;      //Size of the star, compared to the one it starts with, when the bar is empty
@@ -63,12 +63,12 @@ public class StageScript : MonoBehaviour
 
     public void BlackHoleAbsorbed()
     {
-        AddProgress(blackHoleGain);
+        AddProgress(gain);
     }
 
     public void PlanetHit()
     {
-        AddProgress(-planetPenalty);
+        AddProgress(-penalty);
     }
 
     public void Leave()

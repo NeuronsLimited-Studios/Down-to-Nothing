@@ -8,6 +8,7 @@ public class AsteroidSpawnerScript : MonoBehaviour
     public GameObject Asteroid4;
     public GameObject Asteroid5;
     public GameObject Asteroid6;
+    public GameObject EnergyThing;
 
     public Transform spawnArea;
 
@@ -40,16 +41,28 @@ public class AsteroidSpawnerScript : MonoBehaviour
     public float minScale = 1f;
     public float maxScale = 1f;
 
+    public float minEnergySpawnTime = 8f;
+    public float maxEnergySpawnTime = 15f;
+
     float timer;
+    float energyTimer;
+
+    public bool isEnergy;
+
+    public StageScript stage;
 
     void Start()
     {
         timer = Random.Range(minSpawnTime, maxSpawnTime);
+        energyTimer = Random.Range(minEnergySpawnTime, maxEnergySpawnTime);
+
+        stage = FindObjectOfType<StageScript>();
     }
 
     void Update()
     {
         timer -= Time.deltaTime;
+        energyTimer -= Time.deltaTime;
 
         if (timer <= 0f)
         {
@@ -61,6 +74,12 @@ public class AsteroidSpawnerScript : MonoBehaviour
             }
 
             timer = Random.Range(minSpawnTime, maxSpawnTime);
+        }
+
+        if (energyTimer <= 0f)
+        {
+            SpawnEnergyThing();
+            energyTimer = Random.Range(minEnergySpawnTime, maxEnergySpawnTime);
         }
     }
 
@@ -125,5 +144,51 @@ public class AsteroidSpawnerScript : MonoBehaviour
         }
 
         Destroy(newAsteroid, destroyTime);
+    }
+
+    void SpawnEnergyThing()
+    {
+        BoxCollider2D area = spawnArea.GetComponent<BoxCollider2D>();
+
+        Vector2 randomPosition = new Vector2(
+            Random.Range(area.bounds.min.x, area.bounds.max.x),
+            Random.Range(area.bounds.min.y, area.bounds.max.y)
+        );
+
+        GameObject energyThing = Instantiate(
+            EnergyThing,
+            randomPosition,
+            Quaternion.Euler(0f, 0f, Random.Range(minRotation, maxRotation))
+        );
+
+        energyThing.transform.localScale *= Random.Range(minScale, maxScale);
+
+        Rigidbody2D rb = energyThing.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.gravityScale = Random.Range(minGravity, maxGravity);
+
+            rb.linearVelocity = new Vector2(
+                Random.Range(minHorizontalSpeed, maxHorizontalSpeed),
+                Random.Range(minFallSpeed, maxFallSpeed)
+            );
+
+            rb.angularVelocity = Random.Range(minRotationSpeed, maxRotationSpeed);
+        }
+
+        Destroy(energyThing, destroyTime);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isEnergy)
+        {
+            stage.BlackHoleAbsorbed();
+        }
+        else
+        {
+            stage.PlanetHit();
+        }
     }
 }
