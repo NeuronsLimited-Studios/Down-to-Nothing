@@ -182,13 +182,13 @@ public class AsteroidSpawnerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isEnergy)
+        if (collision.gameObject.CompareTag("Energy"))
         {
-            stage.BlackHoleAbsorbed();
+            stage.AddProgress(0.10f);
         }
         else
         {
-            stage.PlanetHit();
+            stage.AddProgress(-0.02f);
         }
     }
 }

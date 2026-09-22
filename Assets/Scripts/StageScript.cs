@@ -89,7 +89,7 @@ public class StageScript : MonoBehaviour
         SceneFadeScript.GoTo(nextScene, 1f, limitBreak);
     }
 
-    void AddProgress(float amount)
+    public void AddProgress(float amount)
     {
         if (completed)
             return;

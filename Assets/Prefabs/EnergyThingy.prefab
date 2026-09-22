@@ -103,9 +103,10 @@ GameObject:
   - component: {fileID: 459571760504590091}
   - component: {fileID: -5891804680361571585}
   - component: {fileID: -9026413248283144931}
+  - component: {fileID: -5461167240958977989}
   m_Layer: 0
   m_Name: EnergyThingy
-  m_TagString: Untagged
+  m_TagString: Energy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,3 +190,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-5461167240958977989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295314942196503719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab9246cafc0f6149a2aa3bd45718329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stage: {fileID: 0}
+  isEnergy: 1
