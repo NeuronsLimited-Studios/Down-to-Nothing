@@ -34,9 +34,18 @@ public class StageScript : MonoBehaviour
         Instance = this;
     }
 
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
+
     void Start()
     {
-        starSize = FindAnyObjectByType<StarMovementScript>().GetComponent<StarSizeScript>();
+        StarMovementScript star = FindAnyObjectByType<StarMovementScript>();
+
+        if (star != null)
+            starSize = star.GetComponent<StarSizeScript>();
 
         progress = startProgress;
         shownProgress = progress;
