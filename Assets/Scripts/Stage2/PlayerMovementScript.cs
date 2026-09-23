@@ -8,7 +8,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     Vector2 targetVelocity;
     Rigidbody2D rb;
-    int direction = 1;
+    int direction = 0;   //Still until A or D is pressed
 
     void Start()
     {

@@ -21,6 +21,8 @@ public class StageScript : MonoBehaviour
     public string nextScene = "Stage2";     //It has to be in the Build Settings
     public WhiteScreenSequence limitBreak;  //What happens on the white screen, between the two stages
 
+    public System.Action beforeLeaving;     //If something sets this, the space bar calls it instead of leaving: then it's up to it to call Leave (the crash of Stage 3)
+
     StarSizeScript starSize;
 
     float progress;
@@ -67,7 +69,12 @@ public class StageScript : MonoBehaviour
             barFill.localScale = new Vector3(shownProgress, 1f, 1f);
 
         if (completed && Input.GetKeyDown(KeyCode.Space))
-            Leave();
+        {
+            if (beforeLeaving != null)
+                beforeLeaving();
+            else
+                Leave();
+        }
     }
 
     public void BlackHoleAbsorbed()

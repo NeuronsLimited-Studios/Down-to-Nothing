@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 //Same controls as Stage 2 (A and D switch direction), but the asteroid falls along the diagonal toward the planet:
@@ -19,7 +20,8 @@ public class AsteroidFallScript : MonoBehaviour
     public float knockRecovery = 6f;    //How fast the asteroid gets back in place after being pushed by a hit
 
     [Header("Crash")]
-    public float diveAcceleration = 35f;    //When the bar is full the asteroid dives into the planet
+    public float diveAcceleration = 35f;    //When the bar is full and the space bar is pressed, the asteroid dives into the planet
+    public float leaveDelay = 1.2f;         //Seconds between the crash and the fade to the next stage
 
     public Vector2 FallDirection { get; private set; }
     public Vector2 SideDirection { get; private set; }     //D moves the asteroid this way, A the opposite way
@@ -35,7 +37,7 @@ public class AsteroidFallScript : MonoBehaviour
     float along;
     float alongVelocity;
     float diveSpeed;
-    int direction = 1;
+    int direction = 0;   //Still until A or D is pressed
     bool diving;
     bool crashed;
 
@@ -53,6 +55,12 @@ public class AsteroidFallScript : MonoBehaviour
         Vector2 toPlanet = planet != null ? (Vector2)planet.position - start : new Vector2(1f, -0.6f);
         FallDirection = toPlanet.normalized;
         SideDirection = new Vector2(-FallDirection.y, FallDirection.x);   //For a fall toward the bottom right this points to the top right
+    }
+
+    void Start()
+    {
+        if (StageScript.Instance != null)
+            StageScript.Instance.beforeLeaving = Dive;   //The space bar doesn't leave right away: first the crash
     }
 
     void OnDestroy()
@@ -94,12 +102,6 @@ public class AsteroidFallScript : MonoBehaviour
 
             float goal = stage != null ? approach * stage.Progress : 0f;
             along = Mathf.SmoothDamp(along, goal, ref alongVelocity, approachTime, Mathf.Infinity, dt);
-
-            if (stage != null && stage.Completed)
-            {
-                diving = true;
-                diveSpeed = Mathf.Max(alongVelocity, 2f);
-            }
         }
         else
         {
@@ -115,6 +117,16 @@ public class AsteroidFallScript : MonoBehaviour
 
         if (diving && planet != null && HitsPlanet(position))
             Crash(position);
+    }
+
+    //Called by the space bar once the bar is full
+    void Dive()
+    {
+        if (diving)
+            return;
+
+        diving = true;
+        diveSpeed = Mathf.Max(alongVelocity, 2f);
     }
 
     //A hit pushes the asteroid for a moment
@@ -145,5 +157,15 @@ public class AsteroidFallScript : MonoBehaviour
 
         if (PlanetFXScript.Instance != null)
             PlanetFXScript.Instance.Impact(position);
+
+        StartCoroutine(LeaveAfterCrash());
+    }
+
+    IEnumerator LeaveAfterCrash()
+    {
+        yield return new WaitForSecondsRealtime(leaveDelay);
+
+        if (StageScript.Instance != null)
+            StageScript.Instance.Leave();
     }
 }

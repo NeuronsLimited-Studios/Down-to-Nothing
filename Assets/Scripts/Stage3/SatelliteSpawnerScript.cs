@@ -46,7 +46,7 @@ public class SatelliteSpawnerScript : MonoBehaviour
 
     void Start()
     {
-        placeholder = Stage3Art.BuildSatellite();
+        placeholder = EffectsArt.BuildSatellite();
         placeholder.transform.SetParent(transform, false);
         placeholder.SetActive(false);
 

@@ -59,13 +59,13 @@ public class PlanetFXScript : MonoBehaviour
         diameter = Mathf.Max(planet.sprite.bounds.size.x, planet.sprite.bounds.size.y);
         int order = planet.sortingOrder;
 
-        haze = Stage3Art.AddSprite("Haze", transform, Stage3Art.Glow, hazeColor, order - 2);
+        haze = EffectsArt.AddSprite("Haze", transform, EffectsArt.Glow, hazeColor, order - 2);
         haze.transform.localScale = Vector3.one * diameter * hazeSize;
 
-        atmosphere = Stage3Art.AddSprite("Atmosphere", transform, Stage3Art.Halo(1f / atmosphereSize), atmosphereColor, order - 1);
+        atmosphere = EffectsArt.AddSprite("Atmosphere", transform, EffectsArt.Halo(1f / atmosphereSize), atmosphereColor, order - 1);
         atmosphere.transform.localScale = Vector3.one * diameter * atmosphereSize;
 
-        rim = Stage3Art.AddSprite("Rim", transform, Stage3Art.Ring, rimColor, order + 2);
+        rim = EffectsArt.AddSprite("Rim", transform, EffectsArt.Ring, rimColor, order + 2);
         rim.transform.localScale = Vector3.one * diameter / 0.9f;     //The ring sprite is brightest at 0.9 of its size: that's where the edge of the planet is
     }
 

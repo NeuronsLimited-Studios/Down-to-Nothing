@@ -47,7 +47,7 @@ public class Stage3FXScript : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        Stage3Art.unlit = unlitMaterial;
+        EffectsArt.unlit = unlitMaterial;
     }
 
     void OnDestroy()
@@ -75,13 +75,13 @@ public class Stage3FXScript : MonoBehaviour
         CreateFlash();
         CreateLines();
 
-        sparks = Stage3Art.AddParticles("Sparks", null, Stage3Art.Glow, 8);
+        sparks = EffectsArt.AddParticles("Sparks", null, EffectsArt.Glow, 8);
         ParticleSystem.MainModule main = sparks.main;
         main.startLifetime = new ParticleSystem.MinMaxCurve(0.25f, 0.7f);
 
         ParticleSystem.ColorOverLifetimeModule sparkColor = sparks.colorOverLifetime;
         sparkColor.enabled = true;
-        sparkColor.color = Stage3Art.Fade(Color.white, new Color(1f, 0.3f, 0.1f), 0.01f);
+        sparkColor.color = EffectsArt.Fade(Color.white, new Color(1f, 0.3f, 0.1f), 0.01f);
 
         ParticleSystem.LimitVelocityOverLifetimeModule drag = sparks.limitVelocityOverLifetime;
         drag.enabled = true;
@@ -92,13 +92,13 @@ public class Stage3FXScript : MonoBehaviour
         sparkRenderer.velocityScale = 0.06f;
         sparkRenderer.lengthScale = 1f;
 
-        smoke = Stage3Art.AddParticles("Explosion Smoke", null, Stage3Art.Glow, 7);
+        smoke = EffectsArt.AddParticles("Explosion Smoke", null, EffectsArt.Glow, 7);
         main = smoke.main;
         main.startLifetime = new ParticleSystem.MinMaxCurve(0.6f, 1.2f);
 
         ParticleSystem.ColorOverLifetimeModule smokeColor = smoke.colorOverLifetime;
         smokeColor.enabled = true;
-        smokeColor.color = Stage3Art.Fade(new Color(1f, 0.6f, 0.3f), new Color(0.2f, 0.18f, 0.2f), 0.02f);
+        smokeColor.color = EffectsArt.Fade(new Color(1f, 0.6f, 0.3f), new Color(0.2f, 0.18f, 0.2f), 0.02f);
 
         ParticleSystem.SizeOverLifetimeModule smokeSize = smoke.sizeOverLifetime;
         smokeSize.enabled = true;
@@ -131,7 +131,7 @@ public class Stage3FXScript : MonoBehaviour
     void CreateLines()
     {
         //Thin streaks of air rushing up the diagonal, all over the screen
-        lines = Stage3Art.AddParticles("Speed Lines", transform, Stage3Art.Glow, 9);
+        lines = EffectsArt.AddParticles("Speed Lines", transform, EffectsArt.Glow, 9);
         lines.transform.localPosition = new Vector3(0f, 0f, 10f);   //In front of the camera, on the plane of the game
 
         ParticleSystem.MainModule main = lines.main;
@@ -146,7 +146,7 @@ public class Stage3FXScript : MonoBehaviour
 
         ParticleSystem.ColorOverLifetimeModule color = lines.colorOverLifetime;
         color.enabled = true;
-        color.color = Stage3Art.Fade(Color.white, Color.white, 0.3f);
+        color.color = EffectsArt.Fade(Color.white, Color.white, 0.3f);
 
         ParticleSystemRenderer renderer = lines.GetComponent<ParticleSystemRenderer>();
         renderer.renderMode = ParticleSystemRenderMode.Stretch;
@@ -222,8 +222,8 @@ public class Stage3FXScript : MonoBehaviour
         if (hitStop > 0f && size <= 1f)
             StartCoroutine(Freeze(hitStop));
 
-        StartCoroutine(Pop(Stage3Art.Glow, position, color, size * 3.5f, 0.35f, 10));
-        StartCoroutine(Pop(Stage3Art.Ring, position, new Color(1f, 0.9f, 0.7f, 0.9f), size * 5f, 0.4f, 10));
+        StartCoroutine(Pop(EffectsArt.Glow, position, color, size * 3.5f, 0.35f, 10));
+        StartCoroutine(Pop(EffectsArt.Ring, position, new Color(1f, 0.9f, 0.7f, 0.9f), size * 5f, 0.4f, 10));
 
         ParticleSystem.EmitParams spark = new ParticleSystem.EmitParams();
 
@@ -265,7 +265,7 @@ public class Stage3FXScript : MonoBehaviour
 
     IEnumerator Pop(Sprite sprite, Vector2 position, Color color, float size, float time, int order)
     {
-        SpriteRenderer pop = Stage3Art.AddSprite("Pop", null, sprite, color, order);
+        SpriteRenderer pop = EffectsArt.AddSprite("Pop", null, sprite, color, order);
         pop.transform.position = position;
 
         for (float t = 0f; t < time; t += Time.unscaledDeltaTime)

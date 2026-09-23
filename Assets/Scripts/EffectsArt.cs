@@ -1,9 +1,9 @@
 using UnityEngine;
 
-//Sprites drawn by code and small helpers shared by all the effects of Stage 3
-public static class Stage3Art
+//Sprites drawn by code and small helpers shared by the effects of the stages
+public static class EffectsArt
 {
-    public static Material unlit;   //Set by Stage3FXScript: glows and particles ignore the 2D lights
+    public static Material unlit;   //Set by the FX script of the stage: glows and particles ignore the 2D lights
 
     static Sprite glow;
     static Sprite circle;

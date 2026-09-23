@@ -32,14 +32,14 @@ public class AsteroidBreakScript : MonoBehaviour
         attached.AddRange(pieces);
         renderers.AddRange(GetComponentsInChildren<SpriteRenderer>());
 
-        debris = Stage3Art.AddParticles("Asteroid Debris", null, Stage3Art.Circle, 6);
+        debris = EffectsArt.AddParticles("Asteroid Debris", null, EffectsArt.Circle, 6);
 
         ParticleSystem.MainModule main = debris.main;
         main.startLifetime = new ParticleSystem.MinMaxCurve(0.5f, 1.2f);
 
         ParticleSystem.ColorOverLifetimeModule color = debris.colorOverLifetime;
         color.enabled = true;
-        color.color = Stage3Art.Fade(Color.white, Color.white, 0.02f);
+        color.color = EffectsArt.Fade(Color.white, Color.white, 0.02f);
 
         ParticleSystem.SizeOverLifetimeModule size = debris.sizeOverLifetime;
         size.enabled = true;

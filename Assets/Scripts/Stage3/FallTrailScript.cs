@@ -38,14 +38,14 @@ public class FallTrailScript : MonoBehaviour
         //Not a child of the asteroid, because the asteroid spins and the trail must not
         effects = new GameObject("Asteroid Effects").transform;
 
-        glow = Stage3Art.AddSprite("Glow", effects, Stage3Art.Glow, glowColor, -1);
-        shock = Stage3Art.AddSprite("Shock", effects, Stage3Art.Glow, shockColor, 5);
+        glow = EffectsArt.AddSprite("Glow", effects, EffectsArt.Glow, glowColor, -1);
+        shock = EffectsArt.AddSprite("Shock", effects, EffectsArt.Glow, shockColor, 5);
 
-        fire = Stage3Art.AddParticles("Fire", effects, Stage3Art.Glow, -2);
-        SetUp(fire, new Vector2(0.35f, 0.7f), fireSpeed, Stage3Art.Fade(fireHot, fireCold, 0.05f), 0.15f);
+        fire = EffectsArt.AddParticles("Fire", effects, EffectsArt.Glow, -2);
+        SetUp(fire, new Vector2(0.35f, 0.7f), fireSpeed, EffectsArt.Fade(fireHot, fireCold, 0.05f), 0.15f);
 
-        smoke = Stage3Art.AddParticles("Smoke", effects, Stage3Art.Glow, -3);
-        SetUp(smoke, new Vector2(0.9f, 1.6f), fireSpeed * 0.6f, Stage3Art.Fade(smokeColor, smokeColor * 0.6f, 0.2f), 1.8f);
+        smoke = EffectsArt.AddParticles("Smoke", effects, EffectsArt.Glow, -3);
+        SetUp(smoke, new Vector2(0.9f, 1.6f), fireSpeed * 0.6f, EffectsArt.Fade(smokeColor, smokeColor * 0.6f, 0.2f), 1.8f);
     }
 
     void SetUp(ParticleSystem particles, Vector2 life, float speed, Gradient color, float endSize)
