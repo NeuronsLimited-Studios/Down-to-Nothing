@@ -76,7 +76,7 @@ public static class EffectsArt
     }
 
     //The sprite is always one unit wide; alpha gets x and y from -1 to 1 and the distance from the center
-    static Sprite Draw(int size, System.Func<float, float, float, float> alpha)
+    public static Sprite Draw(int size, System.Func<float, float, float, float> alpha)
     {
         Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
         texture.wrapMode = TextureWrapMode.Clamp;
