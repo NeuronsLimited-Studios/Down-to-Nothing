@@ -71,10 +71,10 @@ public class AsteroidFallScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.S))
             direction = -1;
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W))
             direction = 1;
 
         transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
