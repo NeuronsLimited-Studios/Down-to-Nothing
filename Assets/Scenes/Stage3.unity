@@ -195,6 +195,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82791021}
   m_CullTransparentMesh: 1
+--- !u!1 &197740072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197740074}
+  - component: {fileID: 197740073}
+  m_Layer: 0
+  m_Name: Global UnityEngine.Rendering.Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &197740073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197740072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 1
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 8e713b12314e8154088e24f111c6b1db, type: 2}
+--- !u!4 &197740074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197740072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &599613519
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +737,85 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1057425652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057425654}
+  - component: {fileID: 1057425653}
+  m_Layer: 0
+  m_Name: SatelliteSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1057425653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057425652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e1a4bfc051ad24696b8ee3631497e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SatelliteSpawnerScript
+  satelliteSprites:
+  - {fileID: -929712234225711235, guid: 85c396bad15b545479e5bf4232127270, type: 3}
+  - {fileID: 4105287763483968831, guid: 9b568840e5f08d342869559ce1b4a536, type: 3}
+  asteroidSprites:
+  - {fileID: -6037939499088626404, guid: 0bb355b0a9f35ed448b1920817fc8bdd, type: 3}
+  - {fileID: -5493874900124580558, guid: 8dba1ef5d54a72843956d8a7c66d3462, type: 3}
+  - {fileID: -8794600078345987109, guid: 17c7828f921c89643bb07ffb2de73981, type: 3}
+  - {fileID: -833164383909932804, guid: 1b3ead263f2d6534c9b49e6dd0445d93, type: 3}
+  - {fileID: 2344367069271349482, guid: 7ed156f87c3f6c0428e93c0862356ef7, type: 3}
+  - {fileID: 7051816730889191394, guid: e6b5381437c51b448bc16f08f4f350d4, type: 3}
+  - {fileID: -4202109266694858383, guid: ad4015d294d7eae4aa5c927292752480, type: 3}
+  - {fileID: -7668923980875877298, guid: a286faa606eccce43a66e49f56d253bf, type: 3}
+  - {fileID: 5998709152863697407, guid: 45cfbfa339c675d46a078ce7fbdcae58, type: 3}
+  asteroidChance: 0.4
+  satelliteSize: 1.8
+  asteroidSize: 1.4
+  minSpawnTime: 0.6
+  maxSpawnTime: 1.5
+  minPerSpawn: 1
+  maxPerSpawn: 2
+  lifetime: 8
+  spawnDistance: 25
+  spawnSpread: 7
+  minSpeed: 9
+  maxSpeed: 15
+  sideSpeed: 3
+  crossChance: 0.3
+  crossDistance: 16
+  minCrossSpeed: 8
+  maxCrossSpeed: 13
+  minScale: 0.9
+  maxScale: 1.2
+  maxSpin: 120
+  asteroidSpin: 250
+  evadeChance: 0.35
+--- !u!4 &1057425654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057425652}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1164039455
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +1055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1236347885}
   - component: {fileID: 1236347886}
+  - component: {fileID: 1236347887}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -942,7 +1071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236347884}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40102512, y: 0.33205217, z: -0.15873659, w: 0.83888197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.57, y: -8.21, z: 0.41}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -996,7 +1125,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1840435030066992420, guid: a40d28d96cdab1c47a776d30ac9f8b3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1009,6 +1138,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1236347887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236347884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b22806ec0292104a9a30df3ef1bec11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetFXScript
+  closeScale: 1.15
+  growTime: 1.5
+  atmosphereColor: {r: 0.3, g: 0.65, b: 1, a: 0.6}
+  atmosphereSize: 1.35
+  hazeColor: {r: 0.2, g: 0.4, b: 1, a: 0.18}
+  hazeSize: 2.2
+  rimColor: {r: 0.6, g: 0.9, b: 1, a: 0.7}
+  burnColor: {r: 1, g: 0.45, b: 0.15, a: 0.6}
+  closeStretch: 2
+  glitchTime: 0.3
+  glitchShift: 0.25
+  glitchStretch: 0.12
 --- !u!1 &1376753940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,6 +1352,7 @@ GameObject:
   - component: {fileID: 1905907633}
   - component: {fileID: 1905907632}
   - component: {fileID: 1905907635}
+  - component: {fileID: 1905907637}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1303,7 +1457,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1324,6 +1478,32 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1905907637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905907631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1885fee0219ad5428f90764043f513b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stage3FXScript
+  unlitMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  maxShake: 0.7
+  shakeRecovery: 1.5
+  hitShake: 0.45
+  hitStop: 0.06
+  hitFlash: 0.25
+  volume: {fileID: 197740073}
+  vignette: 0.3
+  vignetteFull: 0.42
+  vignetteHeat: {r: 0.35, g: 0.08, b: 0, a: 1}
+  lineRate: 25
+  lineRateFull: 90
+  lineSpeed: 40
+  lineColor: {r: 0.8, g: 0.9, b: 1, a: 0.35}
 --- !u!1 &1925166284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,9 +1637,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2102161721}
-  - component: {fileID: 2102161720}
   - component: {fileID: 2102161719}
   - component: {fileID: 2102161718}
+  - component: {fileID: 2102161725}
+  - component: {fileID: 2102161724}
+  - component: {fileID: 2102161723}
+  - component: {fileID: 2102161722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1529,22 +1712,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 2
---- !u!114 &2102161720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102161717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece5f880b40157740ab3271d9c1d609f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  speed: 6
-  acceleration: 20
-  rotationSpeed: -20
+  m_Constraints: 0
 --- !u!4 &2102161721
 Transform:
   m_ObjectHideFlags: 0
@@ -1566,6 +1734,90 @@ Transform:
   - {fileID: 1925166285}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2102161722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6e1ae81e71bee448eb3c20d5abfe29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StarSizeScript
+  resizeTime: 0.5
+--- !u!114 &2102161723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49ef13312aecda449b2bf4086a3152a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallTrailScript
+  fireRate: 90
+  fireRateFull: 240
+  fireSpeed: 6
+  fireSize: 1.5
+  fireHot: {r: 1, g: 0.95, b: 0.7, a: 1}
+  fireCold: {r: 1, g: 0.25, b: 0.05, a: 1}
+  smokeRate: 18
+  smokeRateFull: 45
+  smokeColor: {r: 0.35, g: 0.3, b: 0.3, a: 0.45}
+  glowColor: {r: 1, g: 0.45, b: 0.1, a: 0.45}
+  glowSize: 4
+  shockColor: {r: 1, g: 0.85, b: 0.6, a: 0.6}
+--- !u!114 &2102161724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fa99723568bee4f8215b5770596b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AsteroidBreakScript
+  pieces:
+  - {fileID: 599613520}
+  - {fileID: 749447363}
+  - {fileID: 846246497}
+  - {fileID: 1211575955}
+  - {fileID: 1925166285}
+  pieceSpeed: 5
+  pieceSpin: 400
+  pieceLife: 1.4
+  knock: 0.6
+  chips: 18
+  chipColor: {r: 0.55, g: 0.48, b: 0.42, a: 1}
+  heatColor: {r: 1, g: 0.6, b: 0.4, a: 1}
+  heatTint: 0.5
+--- !u!114 &2102161725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96dfe3ef4447234c8e7121543aa073b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AsteroidFallScript
+  speed: 6
+  acceleration: 20
+  rotationSpeed: -20
+  planet: {fileID: 1236347885}
+  laneWidth: 3.5
+  approach: 6
+  approachTime: 1.2
+  knockRecovery: 6
+  diveAcceleration: 35
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1575,3 +1827,5 @@ SceneRoots:
   - {fileID: 2060720799}
   - {fileID: 1653807686}
   - {fileID: 654395993}
+  - {fileID: 197740074}
+  - {fileID: 1057425654}

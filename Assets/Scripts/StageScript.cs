@@ -29,6 +29,9 @@ public class StageScript : MonoBehaviour
     bool completed;
     bool leaving;
 
+    public float Progress => progress;
+    public bool Completed => completed;
+
     void Awake()
     {
         Instance = this;
@@ -42,10 +45,7 @@ public class StageScript : MonoBehaviour
 
     void Start()
     {
-        StarMovementScript star = FindAnyObjectByType<StarMovementScript>();
-
-        if (star != null)
-            starSize = star.GetComponent<StarSizeScript>();
+        starSize = FindAnyObjectByType<StarSizeScript>();   //The star in Stage 1, the asteroid in Stage 3
 
         progress = startProgress;
         shownProgress = progress;
