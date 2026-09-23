@@ -55,8 +55,6 @@ public class AsteroidSpawnerScript : MonoBehaviour
     {
         timer = Random.Range(minSpawnTime, maxSpawnTime);
         energyTimer = Random.Range(minEnergySpawnTime, maxEnergySpawnTime);
-
-        stage = FindObjectOfType<StageScript>();
     }
 
     void Update()
@@ -178,17 +176,5 @@ public class AsteroidSpawnerScript : MonoBehaviour
         }
 
         Destroy(energyThing, destroyTime);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Energy"))
-        {
-            stage.AddProgress(0.10f);
-        }
-        else
-        {
-            stage.AddProgress(-0.02f);
-        }
     }
 }
