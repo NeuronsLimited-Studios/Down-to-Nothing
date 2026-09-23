@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-//Same controls as Stage 2 (A and D switch direction), but the asteroid falls along the diagonal toward the planet:
-//A and D move it across the diagonal, while the bar decides how close to the planet it is
+//Like Stage 2, two keys switch direction (here W and S), but the asteroid falls along the diagonal toward the planet:
+//W and S move it across the diagonal, while the bar decides how close to the planet it is
 public class AsteroidFallScript : MonoBehaviour
 {
     public static AsteroidFallScript Instance;
@@ -24,7 +24,7 @@ public class AsteroidFallScript : MonoBehaviour
     public float leaveDelay = 1.2f;         //Seconds between the crash and the fade to the next stage
 
     public Vector2 FallDirection { get; private set; }
-    public Vector2 SideDirection { get; private set; }     //D moves the asteroid this way, A the opposite way
+    public Vector2 SideDirection { get; private set; }     //W moves the asteroid this way, S the opposite way
     public Vector2 LaneCenter => start + FallDirection * along;
     public bool Diving => diving;
     public bool Crashed => crashed;
@@ -37,7 +37,7 @@ public class AsteroidFallScript : MonoBehaviour
     float along;
     float alongVelocity;
     float diveSpeed;
-    int direction = 0;   //Still until A or D is pressed
+    int direction = 0;   //Still until W or S is pressed
     bool diving;
     bool crashed;
 

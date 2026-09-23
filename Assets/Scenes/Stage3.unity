@@ -490,7 +490,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -21
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d1f8b5bb7d3f57d41b1a576bce04d029, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -582,7 +582,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d3e5290d7e841fc469c114929e6cb4d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -631,7 +631,7 @@ MonoBehaviour:
   sizeWhenFull: 0.75
   barFill: {fileID: 689044310}
   completeMessage: {fileID: 1164039455}
-  nextScene: Stage5
+  nextScene: Stage4
   limitBreak:
     sound: {fileID: 8300000, guid: 3be3d88cd8670074682021cc45a0fa69, type: 3}
     words:
@@ -1306,7 +1306,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -22
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ffba8ccc352ef20499c5296767a7aa1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1705,7 +1705,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1840435030066992420, guid: a40d28d96cdab1c47a776d30ac9f8b3d, type: 3}
+  m_Sprite: {fileID: 727197910271342813, guid: 3e02778cccc3e50448dbf900629702b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
