@@ -402,11 +402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0e5a2f839f2b14ebe713928724d6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoleculeAnchorsScript
-  moleculeSprites:
-  - {fileID: 21300000, guid: f534e0448ebaed344ac5b57fe2c15a32, type: 3}
-  - {fileID: 21300000, guid: 8e42bcf6cc152254eaba21d4fd368729, type: 3}
-  - {fileID: 21300000, guid: 0ecac3c77393da74ca13a26b9a9c605c, type: 3}
-  spriteScale: 0.55
+  moleculePrefabs:
+  - {fileID: 8344793284785558797, guid: 3a5c2285cacb5054a911180f5a95756a, type: 3}
+  - {fileID: 8607450818675297002, guid: 89faf2cf4257cff49b915149bbdced4e, type: 3}
+  - {fileID: 2473155761443928874, guid: 28e9222ad65825743afefc81056c3020, type: 3}
   minHeight: -3.2
   maxHeight: 3.6
   minGap: 1.8
@@ -876,6 +875,7 @@ MonoBehaviour:
   throwTime: 0.12
   startSpeed: 4
   bounceSpeed: 10
+  bouncePenalty: 0.01
   knockback: 6
   safeTime: 0.8
   collapseTime: 1.8
@@ -1244,9 +1244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc4c954a5f6e174b918d1616f056489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProtonsScript
-  protonSprite: {fileID: 21300000, guid: e6d32cb11b238074daa66183496290c0, type: 3}
-  electronSprite: {fileID: 21300000, guid: cc9122f605abc5841a416968607553d1, type: 3}
-  spriteScale: 0.55
+  protonPrefab: {fileID: 2030771481718043505, guid: d9daebed704b2954897e600208de039f, type: 3}
+  electronPrefab: {fileID: 1436374596944735217, guid: 22a1c070cb53fdc479f4b49f5fca7875, type: 3}
+  glowColor: {r: 1, g: 0.7, b: 0.25, a: 0.35}
   orbitColor: {r: 0.45, g: 0.6, b: 1, a: 0.35}
   startX: 6
   minGap: 7

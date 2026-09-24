@@ -4,15 +4,15 @@ using UnityEngine;
 
 //Protons along the way, each one with electrons spinning fast around it.
 //Going right through the middle and hitting the proton fills the bar; touching an electron makes it go down.
-//No prefabs: they are built from the two sprites
+//Protons and electrons are copies of the two prefabs: how big they are for the hits comes from their sprites
 public class ProtonsScript : MonoBehaviour
 {
     public static ProtonsScript Instance;
 
-    [Header("Sprites")]
-    public Sprite protonSprite;             //Empty = circles drawn by code
-    public Sprite electronSprite;
-    public float spriteScale = 0.55f;       //The same as the atom and the molecules, so all the pixels have the same size
+    [Header("Prefabs")]
+    public GameObject protonPrefab;
+    public GameObject electronPrefab;
+    public Color glowColor = new Color(1f, 0.7f, 0.25f, 0.35f);
     public Color orbitColor = new Color(0.45f, 0.6f, 1f, 0.35f);
 
     [Header("Placing")]
@@ -42,13 +42,13 @@ public class ProtonsScript : MonoBehaviour
         public float flatten;       //1 = a circle, less = an ellipse
         public float tilt;          //Degrees the ellipse is turned
         public float spin;
+        public float size;          //For the hits
     }
 
     class Proton
     {
         public Transform transform;
         public List<Electron> electrons = new List<Electron>();
-        public List<Transform> orbits = new List<Transform>();
         public float radius;
     }
 
@@ -75,7 +75,7 @@ public class ProtonsScript : MonoBehaviour
         float left = cam.transform.position.x - half - 3f;
         float progress = StageScript.Instance != null ? StageScript.Instance.Progress : 0f;
 
-        while (nextX < right)
+        while (nextX < right && protonPrefab != null && electronPrefab != null)
         {
             protons.Add(Create(new Vector2(nextX, Random.Range(minHeight, maxHeight)), progress));
             nextX += Random.Range(minGap, maxGap);
@@ -90,6 +90,9 @@ public class ProtonsScript : MonoBehaviour
 
             if (proton.transform.position.x < left - maxOrbit)
             {
+                foreach (Electron electron in proton.electrons)
+                    Destroy(electron.transform.gameObject);
+
                 Destroy(proton.transform.gameObject);
                 protons.RemoveAt(i);
                 continue;
@@ -102,7 +105,7 @@ public class ProtonsScript : MonoBehaviour
                 electron.angle += electron.spin * Time.deltaTime;
                 electron.transform.position = center + Orbit(electron, electron.angle);
 
-                if (playing && !atom.Safe && Touching(electron.transform.position, electron.transform.lossyScale.x * ElectronSize() * 0.45f, atom))
+                if (playing && !atom.Safe && Touching(electron.transform.position, electron.size, atom))
                     atom.HitElectron(electronPenalty, electron.transform.position);
             }
 
@@ -115,9 +118,11 @@ public class ProtonsScript : MonoBehaviour
         }
     }
 
-    float ElectronSize()
+    //Half the width of the sprites of a copy: how close the atom has to get to touch it
+    static float SizeOf(GameObject copy)
     {
-        return electronSprite != null ? electronSprite.bounds.size.x : 1f;
+        SpriteRenderer sprite = copy.GetComponentInChildren<SpriteRenderer>();
+        return sprite != null ? sprite.bounds.extents.x * 0.9f : 0.3f;
     }
 
     static Vector2 Orbit(Electron electron, float angle)
@@ -137,15 +142,12 @@ public class ProtonsScript : MonoBehaviour
     {
         Proton proton = new Proton();
 
-        Sprite sprite = protonSprite != null ? protonSprite : EffectsArt.Circle;
-        SpriteRenderer core = EffectsArt.AddSprite("Proton", transform, sprite, protonSprite != null ? Color.white : new Color(1f, 0.65f, 0.2f), 3, false);
-        core.transform.position = position;
-        core.transform.localScale = Vector3.one * (protonSprite != null ? spriteScale : 0.8f);
+        GameObject core = Instantiate(protonPrefab, position, Quaternion.identity, transform);
         proton.transform = core.transform;
-        proton.radius = sprite.bounds.size.x * core.transform.localScale.x * 0.45f;
+        proton.radius = SizeOf(core);
 
-        SpriteRenderer glow = EffectsArt.AddSprite("Glow", core.transform, EffectsArt.Glow, new Color(1f, 0.7f, 0.25f, 0.35f), 1);
-        glow.transform.localScale = Vector3.one * 3f / core.transform.localScale.x;
+        SpriteRenderer glow = EffectsArt.AddSprite("Glow", core.transform, EffectsArt.Glow, glowColor, 1);
+        glow.transform.localScale = Vector3.one * 3f / core.transform.lossyScale.x;
 
         //More electrons, and faster, while the bar fills
         int count = Mathf.Max(1, Mathf.RoundToInt(Mathf.Lerp(minElectrons, maxElectrons, progress) + Random.Range(-0.4f, 0.4f)));
@@ -163,13 +165,11 @@ public class ProtonsScript : MonoBehaviour
                 spin = spin * Random.Range(0.85f, 1.15f)
             };
 
-            proton.orbits.Add(DrawOrbit(core.transform, electron));
+            DrawOrbit(core.transform, electron);
 
-            Sprite electronLook = electronSprite != null ? electronSprite : EffectsArt.Circle;
-            SpriteRenderer body = EffectsArt.AddSprite("Electron", transform, electronLook, electronSprite != null ? Color.white : new Color(0.3f, 0.55f, 1f), 4, false);
-            body.transform.localScale = Vector3.one * (electronSprite != null ? spriteScale : 0.35f);
-            body.transform.SetParent(core.transform, true);
+            GameObject body = Instantiate(electronPrefab, position + Orbit(electron, electron.angle), Quaternion.identity, transform);
             electron.transform = body.transform;
+            electron.size = SizeOf(body);
 
             proton.electrons.Add(electron);
         }
@@ -178,11 +178,11 @@ public class ProtonsScript : MonoBehaviour
     }
 
     //The path of an electron, as a dotted line of little squares like pixels
-    Transform DrawOrbit(Transform parent, Electron electron)
+    void DrawOrbit(Transform parent, Electron electron)
     {
         Transform orbit = new GameObject("Orbit").transform;
         orbit.SetParent(parent, false);
-        orbit.localScale = Vector3.one / parent.localScale.x;
+        orbit.localScale = Vector3.one / parent.lossyScale.x;
 
         int dots = Mathf.RoundToInt(electron.radius * 14f);
 
@@ -192,35 +192,41 @@ public class ProtonsScript : MonoBehaviour
             dot.transform.localPosition = Orbit(electron, 360f * i / dots);
             dot.transform.localScale = Vector3.one * 0.055f;
         }
-
-        return orbit;
     }
 
     //The proton was hit: it bursts, and its electrons fly away and fade
     IEnumerator Break(Proton proton)
     {
-        foreach (Transform orbit in proton.orbits)
-            Destroy(orbit.gameObject);
-
-        proton.transform.GetComponent<SpriteRenderer>().enabled = false;
-        proton.transform.Find("Glow").gameObject.SetActive(false);
+        proton.transform.gameObject.SetActive(false);   //The proton, its glow and its orbits
 
         Vector3[] away = new Vector3[proton.electrons.Count];
+        SpriteRenderer[][] looks = new SpriteRenderer[away.Length][];
 
         for (int i = 0; i < away.Length; i++)
+        {
             away[i] = (proton.electrons[i].transform.position - proton.transform.position).normalized * Random.Range(4f, 7f);
+            looks[i] = proton.electrons[i].transform.GetComponentsInChildren<SpriteRenderer>();
+        }
 
         for (float t = 0f; t < 0.6f; t += Time.deltaTime)
         {
             for (int i = 0; i < away.Length; i++)
             {
-                Transform electron = proton.electrons[i].transform;
-                electron.position += away[i] * Time.deltaTime;
-                electron.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f - t / 0.6f);
+                proton.electrons[i].transform.position += away[i] * Time.deltaTime;
+
+                foreach (SpriteRenderer look in looks[i])
+                {
+                    Color color = look.color;
+                    color.a = 1f - t / 0.6f;
+                    look.color = color;
+                }
             }
 
             yield return null;
         }
+
+        foreach (Electron electron in proton.electrons)
+            Destroy(electron.transform.gameObject);
 
         Destroy(proton.transform.gameObject);
     }

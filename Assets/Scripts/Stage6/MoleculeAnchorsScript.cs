@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //The molecules the atom hooks its rope to. They float at any height, and new ones keep coming on the right.
-//No prefabs: they are built from the sprites in the list
+//Each one is a copy of a prefab from the list: the rope hooks to the root of the prefab
 public class MoleculeAnchorsScript : MonoBehaviour
 {
     public static MoleculeAnchorsScript Instance;
 
-    public Sprite[] moleculeSprites;        //Empty = a white circle
-    public float spriteScale = 0.55f;       //The same for every sprite, so all their pixels have the same size
+    public GameObject[] moleculePrefabs;
 
     [Header("Placing")]
     public float minHeight = -3.2f;
@@ -75,18 +74,15 @@ public class MoleculeAnchorsScript : MonoBehaviour
         Camera cam = Camera.main;
         float right = cam.transform.position.x + cam.orthographicSize * cam.aspect + 6f;
 
+        if (moleculePrefabs == null || moleculePrefabs.Length == 0)
+            return;
+
         while (nextX < right)
         {
-            Sprite sprite = moleculeSprites != null && moleculeSprites.Length > 0 ? moleculeSprites[Random.Range(0, moleculeSprites.Length)] : EffectsArt.Circle;
-
-            SpriteRenderer renderer = EffectsArt.AddSprite("Molecule", transform, sprite, Color.white, 2, false);
-            renderer.transform.localScale = Vector3.one * (sprite == EffectsArt.Circle ? 0.6f : spriteScale);
-            renderer.flipX = Random.value < 0.5f;
-
             Vector2 home = new Vector2(nextX, Random.Range(minHeight, maxHeight));
-            renderer.transform.position = home;
+            GameObject molecule = Instantiate(moleculePrefabs[Random.Range(0, moleculePrefabs.Length)], home, Quaternion.identity, transform);
 
-            anchors.Add(new Anchor { transform = renderer.transform, home = home, phase = Random.value * 10f });
+            anchors.Add(new Anchor { transform = molecule.transform, home = home, phase = Random.value * 10f });
             nextX += Random.Range(minGap, maxGap);
         }
     }
