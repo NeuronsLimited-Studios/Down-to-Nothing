@@ -9,15 +9,15 @@ public class FloeSpawnerScript : MonoBehaviour
     public float waterline = 0.76f;         //Where the sea is on the floe textures, from the bottom (0) to the top (1)
 
     [Header("Timing")]
-    public float minSpawnTime = 3.5f;
-    public float maxSpawnTime = 7f;
+    public float minSpawnTime = 4f;
+    public float maxSpawnTime = 7.75f;
 
     [Header("Floes")]
     public float minWidth = 1.4f;           //Units
     public float maxWidth = 2.6f;
     public float minSpeed = 0.7f;
     public float maxSpeed = 1.6f;
-    public float freeze = 0.07f;            //Bar lost by the iceberg for a floe of the biggest width
+    public float freeze = 0.06f;            //Bar lost by the iceberg for a floe of the biggest width
     public float absorbTime = 0.35f;
 
     float timer;

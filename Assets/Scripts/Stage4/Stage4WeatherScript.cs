@@ -30,7 +30,7 @@ public class Stage4WeatherScript : MonoBehaviour
     public float minStormTime = 35f;
     public float maxStormTime = 50f;
     public float stormLength = 7f;
-    public float stormFreeze = 4f;          //How many times faster the iceberg freezes in the shade during a storm
+    public float stormFreeze = 3.5f;        //How many times faster the iceberg freezes in the shade during a storm
 
     public bool Storm { get; private set; }
 

@@ -243,13 +243,13 @@ MonoBehaviour:
   floeSprites:
   - {fileID: 6988565096155882327, guid: 0312542685898ce45a7c7ee9c1c1e04f, type: 3}
   waterline: 0.7635555
-  minSpawnTime: 3.5
-  maxSpawnTime: 7
+  minSpawnTime: 4
+  maxSpawnTime: 7.75
   minWidth: 1.4
   maxWidth: 2.6
   minSpeed: 0.7
   maxSpeed: 1.6
-  freeze: 0.07
+  freeze: 0.06
   absorbTime: 0.35
 --- !u!4 &196499940
 Transform:
@@ -827,8 +827,8 @@ MonoBehaviour:
   speed: 3
   acceleration: 1.5
   screenMargin: 0.3
-  meltRate: 0.025
-  shadeFreeze: 0.004
+  meltRate: 0.029
+  shadeFreeze: 0.0035
   chunks: 10
   streakTime: 5
   streakBonus: 0.5
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   minStormTime: 35
   maxStormTime: 50
   stormLength: 7
-  stormFreeze: 4
+  stormFreeze: 3.5
 --- !u!4 &1712593272
 Transform:
   m_ObjectHideFlags: 0

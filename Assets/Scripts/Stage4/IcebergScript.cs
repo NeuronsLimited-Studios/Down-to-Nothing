@@ -13,8 +13,8 @@ public class IcebergScript : MonoBehaviour
     public float screenMargin = 0.3f;       //Space left between the iceberg and the edge of the screen
 
     [Header("Melting")]
-    public float meltRate = 0.025f;          //Bar gained per second with the whole iceberg in the sun
-    public float shadeFreeze = 0.004f;      //Bar lost per second out of the sun
+    public float meltRate = 0.029f;          //Bar gained per second with the whole iceberg in the sun
+    public float shadeFreeze = 0.0035f;     //Bar lost per second out of the sun
     public int chunks = 10;                 //Little pieces of ice that fall off while the bar fills
     public float streakTime = 5f;           //Seconds of melting without a break to reach the highest bonus...
     public float streakBonus = 0.5f;        //...which makes it melt this much faster (0.5 = 50%)
