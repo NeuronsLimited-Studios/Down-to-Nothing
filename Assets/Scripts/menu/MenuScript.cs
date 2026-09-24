@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MenuScript : MonoBehaviour
 {
-    public void Quit()
+    public void QuitGame()
     {
         Application.Quit();
     }
