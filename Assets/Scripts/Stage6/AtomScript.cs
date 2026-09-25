@@ -36,6 +36,13 @@ public class AtomScript : MonoBehaviour
     public float knockback = 6f;
     public float safeTime = 0.8f;           //Seconds it can't be hit again after an electron
 
+    [Header("Sounds")]
+    public Sound ropeSound = new Sound(0.45f);      //The rope hooks a molecule
+    public Sound protonSound = new Sound(0.55f);
+    public Sound electronSound = new Sound(0.5f);
+    public Sound collapseSound = new Sound(0.5f);   //The atom starts to collapse, after the space bar...
+    public Sound burstSound = new Sound(0.8f);      //...and bursts at the end
+
     [Header("End")]
     public float collapseTime = 1.8f;       //Seconds the atom takes to collapse, after the space bar
     public float leaveDelay = 1f;
@@ -202,6 +209,7 @@ public class AtomScript : MonoBehaviour
 
         anchor = best;
         throwing = throwTime;
+        ropeSound.Play();
         ropeLength = Mathf.Clamp(Vector2.Distance(best.position, transform.position), minRope, maxRope);
 
         if (Stage6FXScript.Instance != null)
@@ -240,6 +248,8 @@ public class AtomScript : MonoBehaviour
 
         if (StageScript.Instance != null && !StageScript.Instance.Completed)
             StageScript.Instance.AddProgress(amount);
+
+        protonSound.Play();
 
         if (Stage6FXScript.Instance != null)
             Stage6FXScript.Instance.Proton(point);
@@ -286,6 +296,7 @@ public class AtomScript : MonoBehaviour
         Vector2 push = ((Vector2)transform.position - point).normalized;
         velocity += push * knockback;
         safe = safeTime;
+        electronSound.Play();
 
         if (Stage6FXScript.Instance != null)
             Stage6FXScript.Instance.Electron(point);
@@ -302,6 +313,7 @@ public class AtomScript : MonoBehaviour
     {
         finished = true;
         anchor = null;
+        collapseSound.Play();
 
         if (size != null)
             size.enabled = false;
@@ -325,6 +337,8 @@ public class AtomScript : MonoBehaviour
 
         if (Stage6FXScript.Instance != null)
             yield return Stage6FXScript.Instance.Unstable(transform, body);
+
+        burstSound.Play();
 
         yield return new WaitForSeconds(leaveDelay);
 

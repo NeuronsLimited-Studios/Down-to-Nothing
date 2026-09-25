@@ -20,6 +20,11 @@ public class Stage3FXScript : MonoBehaviour
     public float hitStop = 0.06f;           //Seconds the game almost freezes when a satellite is hit
     public float hitFlash = 0.25f;
 
+    [Header("Sounds")]
+    public Sound hitSound = new Sound(0.35f);       //A satellite blowing up
+    public Sound crashSound = new Sound(0.9f);      //The asteroid on the planet...
+    public Sound rumbleSound = new Sound(0.7f);     //...and the long rumble after it
+
     [Header("Post processing")]
     public Volume volume;
     public float vignette = 0.3f;
@@ -215,6 +220,16 @@ public class Stage3FXScript : MonoBehaviour
     //A satellite blowing up (or the asteroid on the planet, with a bigger size)
     public void Explosion(Vector2 position, float size, Color color)
     {
+        if (size > 1f)
+        {
+            crashSound.Play();
+            rumbleSound.Play();
+        }
+        else
+        {
+            hitSound.Play();
+        }
+
         Shake(hitShake * Mathf.Sqrt(size));
         Flash(color, hitFlash * Mathf.Sqrt(size));
         pulse = 1f;

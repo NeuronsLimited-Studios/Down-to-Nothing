@@ -25,6 +25,10 @@ public class Stage2FXScript : MonoBehaviour
     public float dustRate = 4f;
     public Color dustColor = new Color(1f, 1f, 1f, 0.12f);
 
+    [Header("Sounds")]
+    public Sound hitSound = new Sound(0.55f);       //An asteroid hit the player
+    public Sound pickupSound = new Sound(0.4f);     //The player took an energy thing
+
     [Header("Feedback")]
     public float pickupShake = 0.06f;       //Units the camera moves
     public float hitShake = 0.12f;
@@ -219,6 +223,7 @@ public class Stage2FXScript : MonoBehaviour
 
     public void Pickup(Vector2 position)
     {
+        pickupSound.Play();
         Shake(pickupShake);
         StartCoroutine(Ring(position, energyGlow, 2.2f, 0.4f));
 
@@ -236,6 +241,7 @@ public class Stage2FXScript : MonoBehaviour
 
     public void Hit(Vector2 position)
     {
+        hitSound.Play();
         Shake(hitShake);
         hurt = 1f;
 

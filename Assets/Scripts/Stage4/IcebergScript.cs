@@ -30,6 +30,9 @@ public class IcebergScript : MonoBehaviour
     public float bobSpeed = 0.7f;           //Bobs per second
     public float tilt = 1.5f;               //Degrees it rocks while it floats
 
+    [Header("Sounds")]
+    public Sound meltSound = new Sound(0.6f);       //What is left melts away, at the end
+
     [Header("End")]
     public float meltAwayTime = 1.8f;       //Seconds the last melt takes, after the space bar
     public float leaveDelay = 1.2f;         //Seconds between the last drop and the fade to the next stage
@@ -212,6 +215,7 @@ public class IcebergScript : MonoBehaviour
     IEnumerator MeltAwayRoutine()
     {
         finished = true;
+        meltSound.Play();
 
         if (size != null)
             size.enabled = false;

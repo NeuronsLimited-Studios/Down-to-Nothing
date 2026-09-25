@@ -646,6 +646,15 @@ MonoBehaviour:
     shake: 25
     duration: 2.6
     fontSize: 400
+  absorbSound:
+    clips: []
+    volume: 0.7
+  planetSound:
+    clips: []
+    volume: 0.55
+  bumpSound:
+    clips: []
+    volume: 0.3
 --- !u!4 &654395993
 Transform:
   m_ObjectHideFlags: 0
@@ -2076,6 +2085,18 @@ MonoBehaviour:
   hitShake: 0.45
   hitStop: 0.06
   hitFlash: 0.25
+  hitSound:
+    clips:
+    - {fileID: 8300000, guid: 0a84e94ea74815b40a38f2bd9b6d048b, type: 3}
+    volume: 0.35
+  crashSound:
+    clips:
+    - {fileID: 8300000, guid: 0a84e94ea74815b40a38f2bd9b6d048b, type: 3}
+    volume: 0.9
+  rumbleSound:
+    clips:
+    - {fileID: 8300000, guid: 549692693cc7def429b6b855c1986bda, type: 3}
+    volume: 0.7
   volume: {fileID: 197740073}
   vignette: 0.3
   vignetteFull: 0.42
@@ -2351,6 +2372,14 @@ MonoBehaviour:
   glowColor: {r: 1, g: 0.45, b: 0.1, a: 0.45}
   glowSize: 4
   shockColor: {r: 1, g: 0.85, b: 0.6, a: 0.6}
+  fireSound:
+    clips:
+    - {fileID: 8300000, guid: 4b0c963bfe804c54e93f1874c4d89cc5, type: 3}
+    volume: 0.3
+  fireFadeTime: 1.5
+  fireTrimStart: 3
+  fireTrimEnd: 3
+  fireCrossfade: 0.5
 --- !u!114 &2102161724
 MonoBehaviour:
   m_ObjectHideFlags: 0

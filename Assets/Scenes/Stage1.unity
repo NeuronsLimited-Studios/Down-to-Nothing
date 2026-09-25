@@ -875,6 +875,20 @@ MonoBehaviour:
     shake: 25
     duration: 2.6
     fontSize: 400
+  absorbSound:
+    clips:
+    - {fileID: 8300000, guid: 9203d8cf8ee97474eb84e9877f6dbe63, type: 3}
+    volume: 0.7
+  planetSound:
+    clips:
+    - {fileID: 8300000, guid: 8de106f6e1cd05144bb9e6b77926d9a5, type: 3}
+    - {fileID: 8300000, guid: eee8e25731ac8fb4b8e86e6e4263caa8, type: 3}
+    volume: 0.55
+  bumpSound:
+    clips:
+    - {fileID: 8300000, guid: 8de106f6e1cd05144bb9e6b77926d9a5, type: 3}
+    - {fileID: 8300000, guid: eee8e25731ac8fb4b8e86e6e4263caa8, type: 3}
+    volume: 0.3
 --- !u!4 &671735518
 Transform:
   m_ObjectHideFlags: 0

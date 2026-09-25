@@ -17,6 +17,7 @@ public class BlackHoleScript : MonoBehaviour
     const float collapseStart = 0.8f;   //The hole collapses and disappears
 
     const float coneRate = 450f;        //Particles per second, at the peak
+    const float soundFade = 0.35f;      //Seconds the sound fades at the end, so it's over exactly when the hole is gone
 
     static bool busy;                   //Only one black hole can feed at a time
 
@@ -26,6 +27,7 @@ public class BlackHoleScript : MonoBehaviour
     Transform swirl;
     Vector3 swirlScale;
     ParticleSystem cone;
+    LoopingSound feeding;
 
     StarMovementScript star;
     Rigidbody2D starRb;
@@ -83,6 +85,13 @@ public class BlackHoleScript : MonoBehaviour
 
         absorbing = true;
         busy = true;
+
+        //The sound lasts as long as the black hole: it fades out right when it disappears
+        if (StageScript.Instance != null)
+            feeding = GameAudio.Loop(StageScript.Instance.absorbSound, true, false);
+
+        if (feeding != null)
+            feeding.FadeOut(soundFade, absorbTime - soundFade);
     }
 
     void Update()
@@ -234,6 +243,9 @@ public class BlackHoleScript : MonoBehaviour
             return;
 
         busy = false;
-        Shader.SetGlobalVector("_LensParams", Vector4.zero);    //The scene ended while it was feeding, and the camera may be gone already
+        Shader.SetGlobalVector("_LensParams", Vector4.zero);
+
+        if (feeding != null)
+            feeding.FadeOut(0.2f);    //The scene ended while it was feeding, and the camera may be gone already
     }
 }

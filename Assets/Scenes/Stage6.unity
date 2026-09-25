@@ -817,6 +817,15 @@ MonoBehaviour:
     shake: 25
     duration: 2.6
     fontSize: 400
+  absorbSound:
+    clips: []
+    volume: 0.7
+  planetSound:
+    clips: []
+    volume: 0.55
+  bumpSound:
+    clips: []
+    volume: 0.3
 --- !u!4 &1233102628
 Transform:
   m_ObjectHideFlags: 0
@@ -877,8 +886,29 @@ MonoBehaviour:
   startSpeed: 4
   bounceSpeed: 10
   bouncePenalty: 0.01
+  moleculeBounce: 0.6
   knockback: 6
   safeTime: 0.8
+  ropeSound:
+    clips:
+    - {fileID: 8300000, guid: e2cda7209f24fe849ad02790e0750b1e, type: 3}
+    volume: 0.45
+  protonSound:
+    clips:
+    - {fileID: 8300000, guid: 93c4105c29d07e54ebc133b23443cf28, type: 3}
+    volume: 0.55
+  electronSound:
+    clips:
+    - {fileID: 8300000, guid: c085ea1aae4d01546a67db386c60ab60, type: 3}
+    volume: 0.5
+  collapseSound:
+    clips:
+    - {fileID: 8300000, guid: 93c4105c29d07e54ebc133b23443cf28, type: 3}
+    volume: 0.5
+  burstSound:
+    clips:
+    - {fileID: 8300000, guid: 0a84e94ea74815b40a38f2bd9b6d048b, type: 3}
+    volume: 0.8
   collapseTime: 1.8
   leaveDelay: 1
 --- !u!114 &1452360883
@@ -1296,8 +1326,8 @@ MonoBehaviour:
   maxOrbit: 2.8
   minSpin: 110
   maxSpin: 200
-  protonGain: 0.07
-  electronPenalty: 0.05
+  protonGain: 0.1
+  electronPenalty: 0.01
 --- !u!4 &2106554787
 Transform:
   m_ObjectHideFlags: 0

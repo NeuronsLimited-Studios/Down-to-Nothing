@@ -323,6 +323,10 @@ MonoBehaviour:
   gravity: 9
   minTimeScale: 0.35
   maxTimeScale: 1.7
+  warningSound:
+    clips:
+    - {fileID: 8300000, guid: 97393fbc1a9dc9042b8e0e4ebff1482f, type: 3}
+    volume: 0.45
   keyW: {fileID: -243099114694839562, guid: 05f4e3d4839ffc144b1a54e139e63290, type: 3}
   keyA: {fileID: -8680797543115379092, guid: 9339423468b28d34a83ecd8227ec5cbc, type: 3}
   keyS: {fileID: -8565396778880288138, guid: 7dcbcd2e7edfc8040927cfc3f00d0ecc, type: 3}
@@ -468,6 +472,10 @@ MonoBehaviour:
   volume: {fileID: 729703065}
   bar: {fileID: 1454193180}
   barFallTime: 1.2
+  breakSound:
+    clips:
+    - {fileID: 8300000, guid: 9203d8cf8ee97474eb84e9877f6dbe63, type: 3}
+    volume: 0.6
 --- !u!4 &544122655
 Transform:
   m_ObjectHideFlags: 0
@@ -944,6 +952,15 @@ MonoBehaviour:
     shake: 25
     duration: 5
     fontSize: 400
+  absorbSound:
+    clips: []
+    volume: 0.7
+  planetSound:
+    clips: []
+    volume: 0.55
+  bumpSound:
+    clips: []
+    volume: 0.3
 --- !u!4 &1640378407
 Transform:
   m_ObjectHideFlags: 0
@@ -1001,6 +1018,10 @@ MonoBehaviour:
   endSpeed: 2.6
   turn: 2
   wobble: 0.8
+  hitSound:
+    clips:
+    - {fileID: 8300000, guid: 97393fbc1a9dc9042b8e0e4ebff1482f, type: 3}
+    volume: 0.75
   penalty: 0.06
 --- !u!4 &1690235975
 Transform:
@@ -1182,6 +1203,15 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0.9}
   - {r: 1, g: 1, b: 1, a: 0.6}
   outlineColor: {r: 0.3, g: 1, b: 0.4, a: 1}
+  deleteSound:
+    clips:
+    - {fileID: 8300000, guid: 97393fbc1a9dc9042b8e0e4ebff1482f, type: 3}
+    - {fileID: 8300000, guid: 1e08a0a5e9079574f85e6050315097b4, type: 3}
+    volume: 0.5
+  outroSound:
+    clips:
+    - {fileID: 8300000, guid: e9375b48a68a21244979d2a035f21fd1, type: 3}
+    volume: 0.7
   consoleLines: 6
   consoleFontSize: 26
   errorColor: {r: 1, g: 0.35, b: 0.35, a: 1}
@@ -1228,6 +1258,10 @@ MonoBehaviour:
   minDrift: 0.2
   maxDrift: 0.7
   corruptAfter: 15
+  breakSound:
+    clips:
+    - {fileID: 8300000, guid: 1e08a0a5e9079574f85e6050315097b4, type: 3}
+    volume: 0.4
   gain: 0.05
   stepTime: 0.06
 --- !u!4 &2130535447

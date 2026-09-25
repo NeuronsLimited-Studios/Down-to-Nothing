@@ -32,6 +32,9 @@ public class Stage4WeatherScript : MonoBehaviour
     public float stormLength = 7f;
     public float stormFreeze = 3.5f;        //How many times faster the iceberg freezes in the shade during a storm
 
+    [Header("Sounds")]
+    public Sound gustSound = new Sound(0.55f);
+
     public bool Storm { get; private set; }
 
     float warmX;
@@ -100,6 +103,7 @@ public class Stage4WeatherScript : MonoBehaviour
                 continue;
 
             float direction = Random.value < 0.5f ? -1f : 1f;
+            gustSound.Play();
 
             //First the wind is seen, then it pushes
             for (float t = 0f; t < gustWarning + gustLength; t += Time.deltaTime)

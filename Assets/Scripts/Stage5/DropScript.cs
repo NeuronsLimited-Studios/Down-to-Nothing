@@ -35,6 +35,10 @@ public class DropScript : MonoBehaviour
     public float bitSpacing = 0.3f;         //Units between two of the tiny drops left behind on dry ice
     public float bitLife = 14f;
 
+    [Header("Sounds")]
+    public Sound mergeSound = new Sound(0.6f);      //It merged with another drop
+    public Sound evaporateSound = new Sound(0.7f);
+
     [Header("End")]
     public float evaporateTime = 1.6f;      //Seconds the drop takes to become vapor, after the space bar
     public float leaveDelay = 1.2f;         //Seconds between the molecule appearing and the fade to the next stage
@@ -189,6 +193,7 @@ public class DropScript : MonoBehaviour
             StageScript.Instance.AddProgress(-amount);
 
         pop = 1f;
+        mergeSound.Play();
 
         if (Stage5FXScript.Instance != null)
             Stage5FXScript.Instance.Merge(point, amount);
@@ -204,6 +209,7 @@ public class DropScript : MonoBehaviour
     IEnumerator EvaporateRoutine()
     {
         finished = true;
+        evaporateSound.Play();
 
         if (size != null)
             size.enabled = false;

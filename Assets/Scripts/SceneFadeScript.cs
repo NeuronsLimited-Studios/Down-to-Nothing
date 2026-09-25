@@ -45,6 +45,8 @@ public class SceneFadeScript : MonoBehaviour
         white.raycastTarget = false;
         SetAlpha(0f);
 
+        StartCoroutine(GameAudio.Silence(fadeTime));     //The sounds of the old scene go quiet while the screen goes white
+
         yield return Fade(0f, 1f, fadeTime);
 
         if (sequence != null)
@@ -54,6 +56,8 @@ public class SceneFadeScript : MonoBehaviour
 
         while (load != null && !load.isDone)
             yield return null;
+
+        GameAudio.Unmute();     //The new scene can make its sounds
 
         yield return new WaitForSecondsRealtime(0.25f);   //A moment of pure white
         yield return Fade(1f, 0f, fadeTime * 1.3f);       //Coming out of the white is a bit slower

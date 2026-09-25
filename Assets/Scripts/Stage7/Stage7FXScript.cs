@@ -28,6 +28,10 @@ public class Stage7FXScript : MonoBehaviour
     public Color[] glitchColors = { new Color(1f, 0f, 1f, 0.8f), new Color(0.2f, 1f, 1f, 0.7f), new Color(0f, 0f, 0f, 0.9f), new Color(1f, 1f, 1f, 0.6f) };
     public Color outlineColor = new Color(0.3f, 1f, 0.4f, 1f);     //The green of the gizmos of the Editor
 
+    [Header("Sounds")]
+    public Sound deleteSound = new Sound(0.5f);     //Something gets deleted at the end
+    public Sound outroSound = new Sound(0.7f);      //The music of the end: it starts when there is nothing left, and goes on in the menu
+
     [Header("Console")]
     public int consoleLines = 6;
     public float consoleFontSize = 26f;
@@ -206,6 +210,11 @@ public class Stage7FXScript : MonoBehaviour
         }
     }
 
+    public void Deleted()
+    {
+        deleteSound.Play();
+    }
+
     public void Broke(Vector2 point)
     {
         Shake(0.08f);
@@ -309,6 +318,7 @@ public class Stage7FXScript : MonoBehaviour
                 continue;
 
             Log("Destroy(" + thing.name.Replace("(Clone)", "") + ")", true);
+            Deleted();
             Destroy(thing);
             Shake(0.1f);
             StartCoroutine(Glitch());
@@ -327,6 +337,8 @@ public class Stage7FXScript : MonoBehaviour
 
         startGlitches = 0f;
         endGlitches = 0f;
+
+        GameAudio.Loop(outroSound, false, false, true);
 
         yield return new WaitForSeconds(delay);
 

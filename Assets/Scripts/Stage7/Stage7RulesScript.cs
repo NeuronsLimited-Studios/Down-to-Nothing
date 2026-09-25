@@ -21,6 +21,9 @@ public class Stage7RulesScript : MonoBehaviour
     public float minTimeScale = 0.35f;
     public float maxTimeScale = 1.7f;
 
+    [Header("Sounds")]
+    public Sound warningSound = new Sound(0.45f);   //A rule is about to break
+
     [Header("Keys on the screen")]
     public Sprite keyW;
     public Sprite keyA;
@@ -85,6 +88,7 @@ public class Stage7RulesScript : MonoBehaviour
             Rule next = (Rule)Random.Range(1, 5);
 
             Warning = true;
+            warningSound.Play();
 
             if (Stage7FXScript.Instance != null)
                 Stage7FXScript.Instance.Log("RuleException: " + next + "()", true);

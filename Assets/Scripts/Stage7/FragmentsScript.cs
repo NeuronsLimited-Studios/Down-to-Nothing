@@ -19,6 +19,9 @@ public class FragmentsScript : MonoBehaviour
     public float maxDrift = 0.7f;
     public float corruptAfter = 15f;        //Seconds before a piece left alone gets corrupted
 
+    [Header("Sounds")]
+    public Sound breakSound = new Sound(0.4f);      //A piece gets broken
+
     [Header("Bar")]
     public float gain = 0.05f;
     public float stepTime = 0.06f;          //Seconds between two components destroyed
@@ -82,6 +85,7 @@ public class FragmentsScript : MonoBehaviour
             {
                 fragments.RemoveAt(i);
                 player.HitFragment(gain, t.position);
+                breakSound.Play();
                 StartCoroutine(Break(fragment.gameObject));
                 continue;
             }

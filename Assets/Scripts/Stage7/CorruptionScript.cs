@@ -23,6 +23,9 @@ public class CorruptionScript : MonoBehaviour
     public float turn = 2f;                 //How quickly they turn toward the player
     public float wobble = 0.8f;
 
+    [Header("Sounds")]
+    public Sound hitSound = new Sound(0.75f);       //A broken shader got the player
+
     [Header("Bar")]
     public float penalty = 0.06f;
 
@@ -102,6 +105,7 @@ public class CorruptionScript : MonoBehaviour
             if (playing && !player.Safe && Vector2.Distance(t.position, player.transform.position) < (blob.radius + player.Radius) * 0.85f)
             {
                 player.HitCorruption(penalty, t.position);
+                hitSound.Play();
                 blobs.RemoveAt(i);
                 Destroy(blob.gameObject);
             }

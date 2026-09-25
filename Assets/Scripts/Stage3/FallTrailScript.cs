@@ -22,6 +22,13 @@ public class FallTrailScript : MonoBehaviour
     public float glowSize = 4f;
     public Color shockColor = new Color(1f, 0.85f, 0.6f, 0.6f);     //The compressed air in front of the asteroid
 
+    [Header("Sound")]
+    public Sound fireSound = new Sound(0.3f);       //The fire while it falls, it stops with the crash
+    public float fireFadeTime = 1.5f;
+    public float fireTrimStart = 3f;        //The fire clip fades in and out at its ends: only the part between them loops...
+    public float fireTrimEnd = 3f;
+    public float fireCrossfade = 0.5f;      //...and where it starts again, two copies play together for a moment, so it never goes quiet
+
     AsteroidFallScript fall;
     Transform effects;
     ParticleSystem fire;
@@ -29,10 +36,12 @@ public class FallTrailScript : MonoBehaviour
     SpriteRenderer glow;
     SpriteRenderer shock;
     float startScale;
+    LoopingSound burning;
 
     void Start()
     {
         fall = GetComponent<AsteroidFallScript>();
+        burning = GameAudio.Loop(fireSound, true, crossfade: fireCrossfade, trimStart: fireTrimStart, trimEnd: fireTrimEnd);
         startScale = transform.localScale.x;
 
         //Not a child of the asteroid, because the asteroid spins and the trail must not
@@ -82,6 +91,12 @@ public class FallTrailScript : MonoBehaviour
         float heat = StageScript.Instance != null ? StageScript.Instance.Progress : 0f;
         bool crashed = fall != null && fall.Crashed;
         bool diving = fall != null && fall.Diving;
+
+        if (crashed && burning != null)
+        {
+            burning.FadeOut(fireFadeTime);
+            burning = null;
+        }
 
         if (diving && !crashed)
             heat = 1.5f;    //The last dive is the hottest moment

@@ -133,7 +133,6 @@ public class UnstableScript : MonoBehaviour
     {
         finished = true;
         Time.timeScale = 1f;
-
         Stage7FXScript fx = Stage7FXScript.Instance;
 
         if (Stage7RulesScript.Instance != null)
@@ -148,7 +147,10 @@ public class UnstableScript : MonoBehaviour
                 continue;
 
             if (fx != null)
+            {
                 fx.Log("Destroy(" + part.GetType().Name + ")", true);
+                fx.Deleted();
+            }
 
             Destroy(part);
             yield return new WaitForSeconds(stepTime);

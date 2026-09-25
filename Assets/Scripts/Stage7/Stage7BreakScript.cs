@@ -19,6 +19,9 @@ public class Stage7BreakScript : MonoBehaviour
     public RectTransform bar;               //The border of the bar, with the bar inside it
     public float barFallTime = 1.2f;
 
+    [Header("Sounds")]
+    public Sound breakSound = new Sound(0.6f);      //A piece of the stage breaks for real
+
     int done;
     bool backgroundBroken;
 
@@ -45,6 +48,7 @@ public class Stage7BreakScript : MonoBehaviour
     void Break(int step)
     {
         Stage7FXScript fx = Stage7FXScript.Instance;
+        breakSound.Play();
 
         if (fx != null)
             fx.Shake(0.3f, 0.4f);

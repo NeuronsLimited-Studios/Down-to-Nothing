@@ -111,6 +111,12 @@ public class PlanetScript : MonoBehaviour
         {
             lastBump = Time.time;
             Emit(collision.GetContact(0).point, bumpParticles, radius * 0.25f);
+
+            //Only the bumps the player can see make a sound, not the ones far away off screen
+            Vector3 onScreen = Camera.main.WorldToViewportPoint(collision.GetContact(0).point);
+
+            if (onScreen.x > 0f && onScreen.x < 1f && onScreen.y > 0f && onScreen.y < 1f && StageScript.Instance != null)
+                StageScript.Instance.bumpSound.Play();
         }
     }
 

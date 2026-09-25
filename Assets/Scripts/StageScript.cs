@@ -21,6 +21,11 @@ public class StageScript : MonoBehaviour
     public string nextScene = "Stage2";     //It has to be in the Build Settings
     public WhiteScreenSequence limitBreak;  //What happens on the white screen, between the two stages
 
+    [Header("Sounds (Stage 1)")]
+    public Sound absorbSound = new Sound(0.7f);     //A black hole starts to absorb the star
+    public Sound planetSound = new Sound(0.55f);    //A planet crashed on the star
+    public Sound bumpSound = new Sound(0.3f);       //Two planets bumped into each other, on screen
+
     public System.Action beforeLeaving;     //If something sets this, the space bar calls it instead of leaving: then it's up to it to call Leave (the crash of Stage 3)
 
     StarSizeScript starSize;
@@ -84,6 +89,7 @@ public class StageScript : MonoBehaviour
 
     public void PlanetHit()
     {
+        planetSound.Play();
         AddProgress(-penalty);
     }
 
