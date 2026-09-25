@@ -804,15 +804,15 @@ MonoBehaviour:
   completeMessage: {fileID: 708863430}
   nextScene: Stage7
   limitBreak:
-    sound: {fileID: 8300000, guid: 449c45faf8fde7e439ff9443525da2d0, type: 3}
+    sound: {fileID: 8300000, guid: 1a0665aa534c21a46a1d7660dc8475d1, type: 3}
     words:
-    - BREAK
+    - DESTROY
     - THE
     - LIMIT
     wordTimes:
     - 0.08
-    - 0.86
-    - 1.26
+    - 1.04
+    - 1.5
     slam: 0.25
     shake: 25
     duration: 2.6
@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 1452360884}
   - component: {fileID: 1452360883}
   - component: {fileID: 1452360882}
+  - component: {fileID: 1452360885}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -910,6 +911,42 @@ Transform:
   - {fileID: 1694926072}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1452360885
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452360881}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &1694926071
 GameObject:
   m_ObjectHideFlags: 0

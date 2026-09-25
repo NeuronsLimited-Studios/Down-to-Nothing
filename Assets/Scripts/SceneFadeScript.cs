@@ -83,6 +83,10 @@ public class SceneFadeScript : MonoBehaviour
             TextMeshProUGUI text = CreateStretched("Word " + sequence.words[i], typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
             text.font = TMP_Settings.defaultFontAsset;
             text.fontSize = sequence.fontSize;
+            text.enableAutoSizing = true;       //A long line (like the title at the very end) gets smaller so it fits the screen
+            text.fontSizeMin = 40f;
+            text.fontSizeMax = sequence.fontSize;
+            text.margin = new Vector4(60f, 0f, 60f, 0f);
             text.fontStyle = FontStyles.Bold;
             text.alignment = TextAlignmentOptions.Center;
             text.textWrappingMode = TextWrappingModes.NoWrap;

@@ -28,6 +28,10 @@ public class AtomScript : MonoBehaviour
     public float bounceSpeed = 10f;         //Falling off the bottom of the screen throws it back up...
     public float bouncePenalty = 0.01f;     //...and the bar goes down just a little
 
+    [Header("Molecules")]
+    [Range(0f, 1f)]
+    public float moleculeBounce = 0.6f;     //How much speed it keeps bouncing off the collider of a molecule (0 = it stops against it)
+
     [Header("Electrons")]
     public float knockback = 6f;
     public float safeTime = 0.8f;           //Seconds it can't be hit again after an electron
@@ -42,6 +46,7 @@ public class AtomScript : MonoBehaviour
 
     LineRenderer rope;
     StarSizeScript size;
+    Collider2D ownCollider;
     Vector2 velocity;
     Transform anchor;
     float ropeLength;
@@ -56,6 +61,7 @@ public class AtomScript : MonoBehaviour
         Instance = this;
 
         size = GetComponent<StarSizeScript>();
+        ownCollider = GetComponent<Collider2D>();
         rope = GetComponentInChildren<LineRenderer>();
         rope.positionCount = 2;
         rope.enabled = false;
@@ -143,6 +149,8 @@ public class AtomScript : MonoBehaviour
                     velocity -= dir * outward;
             }
         }
+
+        position = BounceOffMolecules(position);
 
         Camera cam = Camera.main;
         float bottom = cam.transform.position.y - cam.orthographicSize + Radius;
@@ -235,6 +243,35 @@ public class AtomScript : MonoBehaviour
 
         if (Stage6FXScript.Instance != null)
             Stage6FXScript.Instance.Proton(point);
+    }
+
+    //The atom moves by itself, not with the physics, so the colliders of the molecules are checked by hand:
+    //it gets pushed out of the ones it went into and bounces off them. No Rigidbody2D is needed for this
+    Vector2 BounceOffMolecules(Vector2 position)
+    {
+        foreach (Collider2D hit in Physics2D.OverlapCircleAll(position, Radius))
+        {
+            if (hit == ownCollider || hit.isTrigger)
+                continue;
+
+            Vector2 away = position - hit.ClosestPoint(position);
+            bool inside = away.sqrMagnitude < 0.0001f;
+
+            //With the center already inside the collider the closest point is the center itself: push away from the middle of the molecule
+            if (inside)
+                away = position - (Vector2)hit.bounds.center;
+
+            Vector2 normal = away.sqrMagnitude > 0.0001f ? away.normalized : Vector2.up;
+            float depth = inside ? Radius : Radius - away.magnitude;
+            position += normal * Mathf.Max(depth, 0f);
+
+            float into = Vector2.Dot(velocity, normal);
+
+            if (into < 0f)
+                velocity -= normal * into * (1f + moleculeBounce);
+        }
+
+        return position;
     }
 
     //Called by the electrons: the bar goes down and the atom gets pushed away
