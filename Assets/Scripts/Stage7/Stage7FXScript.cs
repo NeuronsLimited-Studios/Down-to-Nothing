@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 //Goes on the camera of Stage 7: it follows the player in the microscopic world, and does the glitches.
-//Squares of wrong colors that flash on the screen, sparks, the errors written in a corner like the console of Unity,
+//Squares of wrong colors that flash on the screen, sparks,
 //the green outlines left when the sprites are gone, and at the end it deletes everything that is left
 public class Stage7FXScript : MonoBehaviour
 {
@@ -32,12 +31,6 @@ public class Stage7FXScript : MonoBehaviour
     public Sound deleteSound = new Sound(0.5f);     //Something gets deleted at the end
     public Sound outroSound = new Sound(0.7f);      //The music of the end: it starts when there is nothing left, and goes on in the menu
 
-    [Header("Console")]
-    public int consoleLines = 6;
-    public float consoleFontSize = 26f;
-    public Color errorColor = new Color(1f, 0.35f, 0.35f);
-    public Color warningColor = new Color(1f, 0.85f, 0.3f);
-
     public SpriteRenderer Background { get; private set; }
     public static Material Broken => Instance != null ? Instance.brokenMaterial : null;
 
@@ -49,8 +42,6 @@ public class Stage7FXScript : MonoBehaviour
     Vector2 jitter;
     float glitchTimer;
     ParticleSystem sparks;
-    TextMeshProUGUI console;
-    readonly List<string> lines = new List<string>();
 
     void Awake()
     {
@@ -94,34 +85,9 @@ public class Stage7FXScript : MonoBehaviour
         fade.enabled = true;
         fade.color = EffectsArt.Fade(Color.white, Color.white, 0.01f);
 
-        CreateConsole();
 
         if (player != null)
             transform.position = Target(player);
-    }
-
-    void CreateConsole()
-    {
-        Canvas canvas = FindAnyObjectByType<Canvas>();
-
-        if (canvas == null)
-            return;
-
-        GameObject box = new GameObject("Console", typeof(RectTransform));
-        box.transform.SetParent(canvas.transform, false);
-
-        RectTransform rect = box.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(1f, 0f);
-        rect.anchorMax = new Vector2(1f, 0f);
-        rect.pivot = new Vector2(1f, 0f);
-        rect.anchoredPosition = new Vector2(-30f, 30f);
-        rect.sizeDelta = new Vector2(900f, 400f);
-
-        console = box.AddComponent<TextMeshProUGUI>();
-        console.fontSize = consoleFontSize;
-        console.alignment = TextAlignmentOptions.BottomRight;
-        console.raycastTarget = false;
-        console.text = "";
     }
 
     Vector3 Target(UnstableScript player)
@@ -236,21 +202,6 @@ public class Stage7FXScript : MonoBehaviour
         Burst(point, Color.white, 5, 1f);
     }
 
-    //A line in the fake console in the corner; the oldest ones go away
-    public void Log(string text, bool error)
-    {
-        if (console == null)
-            return;
-
-        Color color = error ? errorColor : warningColor;
-        lines.Add("<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">" + text + "</color>");
-
-        while (lines.Count > consoleLines)
-            lines.RemoveAt(0);
-
-        console.text = string.Join("\n", lines);
-    }
-
     //The sprites of an object are destroyed, and all that is left is a green circle like the gizmo of a collider in the Editor
     public static void Outline(GameObject target, float radius)
     {
@@ -296,16 +247,11 @@ public class Stage7FXScript : MonoBehaviour
                 doomed.Add(child.gameObject);
         }
 
-        foreach (Transform child in transform)
-            if (child.name == "Key")
-                doomed.Add(child.gameObject);
-
         Canvas canvas = FindAnyObjectByType<Canvas>();
 
         if (canvas != null)
             foreach (Transform child in canvas.transform)
-                if (child.name != "Console")
-                    doomed.Add(child.gameObject);
+                doomed.Add(child.gameObject);
 
         if (Background != null)
             doomed.Add(Background.gameObject);
@@ -317,7 +263,6 @@ public class Stage7FXScript : MonoBehaviour
             if (thing == null)
                 continue;
 
-            Log("Destroy(" + thing.name.Replace("(Clone)", "") + ")", true);
             Deleted();
             Destroy(thing);
             Shake(0.1f);
@@ -328,12 +273,6 @@ public class Stage7FXScript : MonoBehaviour
 
         cam.backgroundColor = Color.black;
         yield return new WaitForSeconds(0.6f);
-
-        //The last thing to go is the console itself
-        lines.Clear();
-
-        if (console != null)
-            Destroy(console.gameObject);
 
         startGlitches = 0f;
         endGlitches = 0f;

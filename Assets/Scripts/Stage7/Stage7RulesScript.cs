@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 //The rules of Stage 7 stop making sense for a few seconds at a time: the keys get mixed up, a gravity that wasn't there shows up,
 //or time starts to stutter. Every broken rule flashes a warning first, and the keys on the screen always show which one moves where
@@ -29,8 +30,7 @@ public class Stage7RulesScript : MonoBehaviour
     public Sprite keyA;
     public Sprite keyS;
     public Sprite keyD;
-    public float keySize = 0.55f;
-    public Vector2 keysCorner = new Vector2(1.4f, 1.2f);   //From the bottom left corner of the screen, in units
+    public Image[] slots;                   //The keys of the Canvas, like in the other stages, in this order: up, left, down, right
 
     public Rule Current { get; private set; }
     public bool Warning { get; private set; }
@@ -40,7 +40,6 @@ public class Stage7RulesScript : MonoBehaviour
     readonly Vector2[] moves = { Vector2.up, Vector2.left, Vector2.down, Vector2.right };
     readonly Vector2[] normal = { Vector2.up, Vector2.left, Vector2.down, Vector2.right };
     readonly KeyCode[] keys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
-    SpriteRenderer[] slots;
 
     void Awake()
     {
@@ -57,7 +56,7 @@ public class Stage7RulesScript : MonoBehaviour
 
     void Start()
     {
-        CreateKeys();
+        ShowKeys();
         StartCoroutine(Loop());
     }
 
@@ -89,9 +88,6 @@ public class Stage7RulesScript : MonoBehaviour
 
             Warning = true;
             warningSound.Play();
-
-            if (Stage7FXScript.Instance != null)
-                Stage7FXScript.Instance.Log("RuleException: " + next + "()", true);
 
             for (float t = 0f; t < warning; t += Time.unscaledDeltaTime)
             {
@@ -148,37 +144,6 @@ public class Stage7RulesScript : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    //Four slots in a cross, one for each direction: each one shows the key that moves that way right now
-    void CreateKeys()
-    {
-        Transform cam = Camera.main.transform;
-        slots = new SpriteRenderer[4];
-
-        for (int i = 0; i < 4; i++)
-        {
-            slots[i] = EffectsArt.AddSprite("Key", cam, keyW, Color.white, 30, false);
-            slots[i].transform.localScale = Vector3.one * keySize / Mathf.Max(0.01f, keyW != null ? keyW.bounds.size.x : 1f);
-        }
-
-        ShowKeys();
-    }
-
-    void LateUpdate()
-    {
-        if (slots == null)
-            return;
-
-        Camera cam = Camera.main;
-        Vector3 corner = new Vector3(-cam.orthographicSize * cam.aspect + keysCorner.x, -cam.orthographicSize + keysCorner.y, 10f);
-        float gap = keySize * 1.1f;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (slots[i] != null)
-                slots[i].transform.localPosition = corner + (Vector3)(normal[i] * gap);
-        }
-    }
-
     void ShowKeys()
     {
         Sprite[] look = { keyW, keyA, keyS, keyD };
@@ -203,7 +168,7 @@ public class Stage7RulesScript : MonoBehaviour
     {
         Sprite[] look = { keyW, keyA, keyS, keyD };
 
-        foreach (SpriteRenderer slot in slots)
+        foreach (Image slot in slots)
         {
             if (slot != null && Random.value < 0.3f)
                 slot.sprite = look[Random.Range(0, 4)];

@@ -147,10 +147,7 @@ public class UnstableScript : MonoBehaviour
                 continue;
 
             if (fx != null)
-            {
-                fx.Log("Destroy(" + part.GetType().Name + ")", true);
                 fx.Deleted();
-            }
 
             Destroy(part);
             yield return new WaitForSeconds(stepTime);

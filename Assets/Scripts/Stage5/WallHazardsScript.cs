@@ -186,6 +186,10 @@ public class WallHazardsScript : MonoBehaviour
         if (top - y > frostDepth && Random.value < frostPerUnit && frostSprites != null && frostSprites.Length > 0)
         {
             Sprite sprite = frostSprites[Random.Range(0, frostSprites.Length)];
+
+            if (sprite == null)
+                return;     //A sprite of the list is missing (deleted from the project): no frost, but the rest of the wall goes on
+
             float scale = spriteScale;
             float width = sprite.bounds.size.x * scale;
             Vector2 position = new Vector2(Random.Range(-half + width * 0.3f, half - width * 0.3f), y - Random.value);

@@ -57,28 +57,19 @@ public class Stage7BreakScript : MonoBehaviour
         {
             case 0:
                 if (volume != null)
-                {
-                    Log("Destroy(Volume): the post processing is gone");
                     Destroy(volume);
-                }
                 break;
 
             case 1:
                 if (bar != null)
-                {
-                    Log("NullReferenceException: Canvas.layout");
                     StartCoroutine(Fall(bar));
-                }
                 break;
 
             case 2:
-                Log("MissingReferenceException: Background.sprite");
                 backgroundBroken = true;
                 break;
 
             case 3:
-                Log("Destroy(SpriteRenderer) on every piece");
-
                 if (FragmentsScript.Instance != null)
                     FragmentsScript.Instance.OutlineAll();
                 break;
@@ -87,28 +78,18 @@ public class Stage7BreakScript : MonoBehaviour
                 UnstableScript player = UnstableScript.Instance;
 
                 if (player != null && player.body != null)
-                {
-                    Log("Destroy(SpriteRenderer) on Player");
                     Stage7FXScript.Outline(player.gameObject, player.radius);
-                }
                 break;
 
             case 5:
                 if (fx != null && fx.Background != null)
                 {
-                    Log("Destroy(Background): nothing left to stand on");
                     backgroundBroken = false;
                     Destroy(fx.Background.gameObject);
                     Camera.main.backgroundColor = Color.black;
                 }
                 break;
         }
-    }
-
-    void Log(string text)
-    {
-        if (Stage7FXScript.Instance != null)
-            Stage7FXScript.Instance.Log(text, true);
     }
 
     //Now and then the background loses its sprite for a few frames, or its shader breaks and it goes magenta

@@ -123,9 +123,6 @@ public class CorruptionScript : MonoBehaviour
     //A piece of the world left alone too long: its shader breaks, it goes magenta and starts chasing the player too
     public void Corrupt(GameObject piece, float radius)
     {
-        if (Stage7FXScript.Instance != null)
-            Stage7FXScript.Instance.Log("Shader error in '" + piece.name.Replace("(Clone)", "") + "'", false);
-
         piece.transform.SetParent(transform, true);
         Add(piece, radius);
     }
