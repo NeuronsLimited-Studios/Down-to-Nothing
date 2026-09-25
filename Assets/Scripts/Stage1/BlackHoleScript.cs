@@ -9,6 +9,7 @@ public class BlackHoleScript : MonoBehaviour
     public float pullIn = 10f;          //How much the star is dragged towards the hole while it's being drained
     public float coneSpeed = 130f;      //How fast the matter of the star flies into the hole
     public Color coneColor = new Color(1f, 0.5f, 0.1f);   //The color of the star, so the cone looks made of its matter
+    public Material particleMaterial;   //Set on the prefab: a material only taken by code is left out of the build, and the particles come out magenta
 
     //All of these are fractions of absorbTime
     const float lensRise = 0.3f;        //The distortion reaches its maximum
@@ -208,7 +209,9 @@ public class BlackHoleScript : MonoBehaviour
         ParticleSystemRenderer particleRenderer = coneObject.GetComponent<ParticleSystemRenderer>();
         particleRenderer.sortingOrder = 3;
 
-        if (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null)
+        if (particleMaterial != null)
+            particleRenderer.sharedMaterial = particleMaterial;
+        else if (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null)
             particleRenderer.sharedMaterial = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.defaultParticleMaterial;
 
         return ps;

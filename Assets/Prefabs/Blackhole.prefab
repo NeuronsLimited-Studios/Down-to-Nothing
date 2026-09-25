@@ -181,6 +181,7 @@ MonoBehaviour:
   pullIn: 10
   coneSpeed: 130
   coneColor: {r: 1, g: 0.5, b: 0.1, a: 1}
+  particleMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
 --- !u!1 &7355322712696065554
 GameObject:
   m_ObjectHideFlags: 0

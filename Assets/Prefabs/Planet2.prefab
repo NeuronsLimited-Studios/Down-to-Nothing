@@ -122,6 +122,7 @@ MonoBehaviour:
   dustSpeed: 12
   dustSize: 3
   dustLifetime: 1.2
+  dustMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
 --- !u!1 &3218425552976159438
 GameObject:
   m_ObjectHideFlags: 0

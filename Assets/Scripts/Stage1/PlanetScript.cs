@@ -21,6 +21,7 @@ public class PlanetScript : MonoBehaviour
     public float dustSpeed = 12f;
     public float dustSize = 3f;
     public float dustLifetime = 1.2f;
+    public Material dustMaterial;       //Set on the prefab: a material only taken by code is left out of the build, and the dust comes out magenta
 
     const float minDistance = 15f;      //Below this distance the pull stops growing, so the planet never gets shot away
     const float sleepingDamping = 3f;   //A planet that hasn't woken up yet stops quickly after another planet pushes it
@@ -193,7 +194,9 @@ public class PlanetScript : MonoBehaviour
         ParticleSystemRenderer particleRenderer = dustObject.GetComponent<ParticleSystemRenderer>();
         particleRenderer.sortingOrder = 1;
 
-        if (GraphicsSettings.currentRenderPipeline != null)
+        if (dustMaterial != null)
+            particleRenderer.sharedMaterial = dustMaterial;
+        else if (GraphicsSettings.currentRenderPipeline != null)
             particleRenderer.sharedMaterial = GraphicsSettings.currentRenderPipeline.defaultParticleMaterial;
 
         return ps;
