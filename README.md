@@ -1,75 +1,75 @@
 # DOWN TO NOTHING
 
-> Si parte da una stella immensa e si scende, stadio dopo stadio, fino al **niente**.
+> Start as an immense star and go down, stage after stage, until there is **nothing** left.
 
 ![Unity](https://img.shields.io/badge/Unity-6000.6.0f1-black?logo=unity)
 ![Render Pipeline](https://img.shields.io/badge/render-URP%202D-blue)
 ![Version](https://img.shields.io/badge/version-1.0.0-brightgreen)
 
-**Down to Nothing** è un gioco 2D in pixel art sviluppato da **NeuronsLimited Studios**.
-Il giocatore attraversa sette stadi, ognuno con un gameplay diverso, diventando ogni
-volta qualcosa di più piccolo: una stella, un pianeta, un asteroide, un iceberg, una
-goccia, un atomo… e infine un'entità così instabile da rompere il gioco stesso.
+**Down to Nothing** is a 2D pixel art game made by **NeuronsLimited Studios**.
+The player goes through seven stages, each with a different gameplay, becoming something
+smaller every time: a star, a planet, an asteroid, an iceberg, a drop, an atom… and
+finally an entity so unstable that it breaks the game itself.
 
 ---
 
-## Come si gioca
+## How to play
 
-Ogni stadio ha una **barra** in alto: le azioni giuste la riempiono, gli errori la fanno
-calare. Quando la barra è piena si preme **SPAZIO** e si scende allo stadio successivo,
-attraverso uno schermo bianco: *REACH THE LIMIT*.
+Every stage has a **bar** at the top: the right moves fill it, mistakes drain it. When
+the bar is full, press **SPACE** to go down to the next stage, through a white screen:
+*REACH THE LIMIT*.
 
-| # | Entità | Gameplay | Controlli |
+| # | Entity | Gameplay | Controls |
 |---|---|---|---|
-| 1 | **Stella** | Vaghi nello spazio e ti fai divorare dai buchi neri, che ti rimpiccioliscono. I pianeti attratti dalla tua gravità ti si schiantano addosso e ti fanno ricrescere. | WASD |
-| 2 | **Pianeta** | Scorri da un lato all'altro: raccogli le sfere di energia ed evita gli asteroidi. | A / D |
-| 3 | **Asteroide** | Precipiti in diagonale verso un pianeta tra satelliti e asteroidi di lava. A barra piena, lo schianto. | W / S |
-| 4 | **Iceberg** | Galleggi sul mare e ti sciogli al sole; i lastroni di ghiaccio alla deriva ti raffreddano. Vento e meteo ti spingono. *(Occhio ai gamberetti.)* | A / D |
-| 5 | **Goccia** | L'ultima goccia dell'iceberg scivola giù per la parete di un ghiacciaio. Sul ghiaccio asciutto ti consumi; altre gocce, brina e rigagnoli ti ostacolano. | A / D |
-| 6 | **Atomo** | L'atomo di ossigeno si dondola come Tarzan con una corda agganciata alle molecole, attraversando i protoni e schivando gli elettroni. | Click (corda), WASD |
-| 7 | **Entità instabile** | Il mondo microscopico si sta corrompendo: shader rotti magenta ti inseguono, le regole (tasti, gravità, tempo) smettono di funzionare e tutto ciò che tocchi si rompe davvero, fino a cancellare ogni cosa. | WASD (finché funzionano) |
+| 1 | **Star** | Wander through space and let black holes devour you to shrink. Planets pulled in by your gravity crash into you and make you grow back. | WASD |
+| 2 | **Planet** | Slide from side to side: collect the energy orbs and dodge the asteroids. | A / D |
+| 3 | **Asteroid** | Fall diagonally toward a planet, between satellites and lava asteroids. When the bar is full: the crash. | W / S |
+| 4 | **Iceberg** | Float on the sea and melt in the sun; drifting ice floes cool you down. Wind and weather push you around. *(Watch out for shrimps.)* | A / D |
+| 5 | **Drop** | The last drop of the iceberg slides down the wall of a glacier. Dry ice wears you down; other drops, frost and streams get in your way. | A / D |
+| 6 | **Atom** | The oxygen atom swings like Tarzan on a rope hooked to the molecules, going through the protons and dodging the electrons. | Click (rope), WASD |
+| 7 | **Unstable entity** | The microscopic world is getting corrupted: broken magenta shaders chase you, the rules (keys, gravity, time) stop working, and everything you touch really breaks, until everything is deleted. | WASD (while they work) |
 
-Nella maggior parte degli stadi i due tasti non muovono il giocatore ma **cambiano la
-direzione** in cui sta andando.
+In most stages the two keys don't move the player: they **switch the direction** it's
+going.
 
 ---
 
-## Aprire il progetto
+## Opening the project
 
-1. Installa **Unity Hub** e l'Editor **Unity 6000.6.0f1**.
-2. Clona il repository:
+1. Install **Unity Hub** and the **Unity 6000.6.0f1** Editor.
+2. Clone the repository:
    ```bash
    git clone https://github.com/NeuronsLimited-Studios/Down-to-Nothing.git
    ```
-3. In Unity Hub: `Add` → `Add project from disk` e seleziona la cartella del progetto.
-4. Apri `Assets/Scenes/Menu.unity` e premi **Play**.
+3. In Unity Hub: `Add` → `Add project from disk` and select the project folder.
+4. Open `Assets/Scenes/Menu.unity` and press **Play**.
 
 ---
 
-## Stack tecnico
+## Tech stack
 
 - **Unity** 6000.6.0f1
-- **Universal Render Pipeline** (2D Renderer) con post processing
-- Input: Input Manager classico + Input System
+- **Universal Render Pipeline** (2D Renderer) with post processing
+- Input: classic Input Manager + Input System
 - TextMesh Pro, uGUI
-- Pacchetti 2D: Sprite, Animation, Aseprite importer, PSD importer, SpriteShape, Tilemap
+- 2D packages: Sprite, Animation, Aseprite importer, PSD importer, SpriteShape, Tilemap
 
 ---
 
-## Struttura del progetto
+## Project structure
 
 ```
 Assets/
   Scenes/       # Menu, Stage1 … Stage7
   Scripts/
-    menu/       # Menu principale, impostazioni (volumi), logo
-    Stage1-7/   # Gameplay ed effetti di ogni stadio
-    Audio/      # Gestione suoni e musica
-    StageScript.cs      # Barra di progresso e passaggio allo stadio successivo
-    SceneFadeScript.cs  # Dissolvenze e schermo bianco tra gli stadi
-  Prefabs/      # Pianeti, buchi neri, asteroidi, molecole…
+    menu/       # Main menu, settings (volumes), logo
+    Stage1-7/   # Gameplay and effects of each stage
+    Audio/      # Sounds and music
+    StageScript.cs      # Progress bar and moving on to the next stage
+    SceneFadeScript.cs  # Fades and the white screen between stages
+  Prefabs/      # Planets, black holes, asteroids, molecules…
   Sprites/      # Pixel art
-  Sounds/       # Effetti e musica
+  Sounds/       # Sound effects and music
   Shaders/
   Settings/     # URP, Input System, build profile
 Packages/
@@ -78,14 +78,14 @@ ProjectSettings/
 
 ---
 
-## Crediti
+## Credits
 
-Creato da **NeuronsLimited Studios**.
+Made by **NeuronsLimited Studios**.
 
-## Licenza
+## License
 
-© 2026 NeuronsLimited Studios. **Tutti i diritti riservati.**
+© 2026 NeuronsLimited Studios. **All rights reserved.**
 
-Il codice e gli asset sono pubblici solo per essere **consultati**. Non è consentito
-copiare, modificare, ridistribuire o pubblicare versioni modificate del progetto, in tutto
-o in parte, senza il permesso scritto di NeuronsLimited Studios. Dettagli in [LICENSE](LICENSE).
+The code and assets are public for **viewing only**. Copying, modifying, redistributing or
+publishing modified versions of the project, in whole or in part, is not allowed without
+written permission from NeuronsLimited Studios. See [LICENSE](LICENSE) for details.
