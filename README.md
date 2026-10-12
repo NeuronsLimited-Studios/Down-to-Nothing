@@ -1,69 +1,40 @@
 # DOWN TO NOTHING
 
-> Gioco Unity in cui si **scende di scala**: si parte da un'entità immensa, una stella
-> chiamata **Absolute**, e a ogni stadio si diventa qualcosa di più piccolo, fino a
-> un'entità così instabile da **corrompere tutte le regole del gameplay**.
+> Si parte da una stella immensa e si scende, stadio dopo stadio, fino al **niente**.
 
 ![Unity](https://img.shields.io/badge/Unity-6000.6.0f1-black?logo=unity)
 ![Render Pipeline](https://img.shields.io/badge/render-URP%202D-blue)
-![Input](https://img.shields.io/badge/input-both%20Input%20System-blueviolet)
-![Status](https://img.shields.io/badge/status-concept-orange)
+![Version](https://img.shields.io/badge/version-1.0.0-brightgreen)
+
+**Down to Nothing** è un gioco 2D in pixel art sviluppato da **NeuronsLimited Studios**.
+Il giocatore attraversa sette stadi, ognuno con un gameplay diverso, diventando ogni
+volta qualcosa di più piccolo: una stella, un pianeta, un asteroide, un iceberg, una
+goccia, un atomo… e infine un'entità così instabile da rompere il gioco stesso.
 
 ---
 
-## Concept
+## Come si gioca
 
-Il giocatore parte dal punto più alto della scala dell'esistenza: **Absolute**, una
-stella immensa. Il gioco è diviso in **stadi**, e ogni stadio ha un **gameplay
-diverso** dagli altri. Alla fine di ognuno si **scende di entità**: da stella a
-pianeta, e così via, sempre più in basso, sempre più piccoli.
+Ogni stadio ha una **barra** in alto: le azioni giuste la riempiono, gli errori la fanno
+calare. Quando la barra è piena si preme **SPAZIO** e si scende allo stadio successivo,
+attraverso uno schermo bianco: *REACH THE LIMIT*.
 
-In fondo alla scala c'è un'entità minuscola e **talmente instabile da corrompere
-tutte le regole del gameplay**. È lì che la storia del gioco finisce.
-
-### Discesa
-
-Scendere non è solo cambiare ambientazione: cambia il **modo di giocare**. Ogni
-transizione chiude uno stadio, cambia l'entità controllata e porta il giocatore in un
-gameplay nuovo. Più si scende, più l'entità è piccola e meno stabile.
-
-### Pilastri di design (draft)
-
-1. **Ogni stadio è un gioco a sé.** Cambiare entità significa cambiare gameplay, non
-   solo grafica.
-2. **La scala è il tema.** Dall'immenso al minuscolo: dimensione e prospettiva cambiano
-   a ogni discesa.
-3. **Il finale rompe le regole.** L'ultima entità è instabile e corrompe il gameplay
-   stesso: è così che la storia si chiude.
-
----
-
-## Loop di gioco
-
-```
-Stadio N ──► gameplay dello stadio ──► fine stadio ──► discesa di entità
-   ▲                                                          │
-   └──────────────── stadio N+1, nuove regole  ◄──────────────┘
-
-Ultimo stadio: entità instabile ──► regole corrotte ──► fine della storia
-```
-
----
-
-## Scala degli stadi (draft)
-
-| # | Entità | Scala | Gameplay |
+| # | Entità | Gameplay | Controlli |
 |---|---|---|---|
-| 1 | **Absolute** (stella, nome provvisorio) | Immensa | Da definire |
-| 2 | Pianeta | Molto grande | Da definire |
-| … | … | … | Da definire |
-| Finale | Entità instabile | Minuscola | Le regole del gameplay si corrompono |
+| 1 | **Stella** | Vaghi nello spazio e ti fai divorare dai buchi neri, che ti rimpiccioliscono. I pianeti attratti dalla tua gravità ti si schiantano addosso e ti fanno ricrescere. | WASD |
+| 2 | **Pianeta** | Scorri da un lato all'altro: raccogli le sfere di energia ed evita gli asteroidi. | A / D |
+| 3 | **Asteroide** | Precipiti in diagonale verso un pianeta tra satelliti e asteroidi di lava. A barra piena, lo schianto. | W / S |
+| 4 | **Iceberg** | Galleggi sul mare e ti sciogli al sole; i lastroni di ghiaccio alla deriva ti raffreddano. Vento e meteo ti spingono. *(Occhio ai gamberetti.)* | A / D |
+| 5 | **Goccia** | L'ultima goccia dell'iceberg scivola giù per la parete di un ghiacciaio. Sul ghiaccio asciutto ti consumi; altre gocce, brina e rigagnoli ti ostacolano. | A / D |
+| 6 | **Atomo** | L'atomo di ossigeno si dondola come Tarzan con una corda agganciata alle molecole, attraversando i protoni e schivando gli elettroni. | Click (corda), WASD |
+| 7 | **Entità instabile** | Il mondo microscopico si sta corrompendo: shader rotti magenta ti inseguono, le regole (tasti, gravità, tempo) smettono di funzionare e tutto ciò che tocchi si rompe davvero, fino a cancellare ogni cosa. | WASD (finché funzionano) |
 
-Gli stadi intermedi e il gameplay di ciascuno sono ancora da decidere.
+Nella maggior parte degli stadi i due tasti non muovono il giocatore ma **cambiano la
+direzione** in cui sta andando.
 
 ---
 
-## Come aprire il progetto
+## Aprire il progetto
 
 1. Installa **Unity Hub** e l'Editor **Unity 6000.6.0f1**.
 2. Clona il repository:
@@ -78,10 +49,10 @@ Gli stadi intermedi e il gameplay di ciascuno sono ancora da decidere.
 ## Stack tecnico
 
 - **Unity** 6000.6.0f1
-- **Universal Render Pipeline** 17.6.0 (2D Renderer)
-- **Both Input Systems** (`Assets/Settings/InputSystem_Actions.inputactions`)
-- Pacchetti 2D: Animation, Aseprite importer, PSD importer, SpriteShape, Tilemap (+ Extras)
-- Timeline, uGUI
+- **Universal Render Pipeline** (2D Renderer) con post processing
+- Input: Input Manager classico + Input System
+- TextMesh Pro, uGUI
+- Pacchetti 2D: Sprite, Animation, Aseprite importer, PSD importer, SpriteShape, Tilemap
 
 ---
 
@@ -89,26 +60,32 @@ Gli stadi intermedi e il gameplay di ciascuno sono ancora da decidere.
 
 ```
 Assets/
-  Scenes/          # Menu
-  Settings/        # URP, Input System, template scena 2D lit
-Packages/          # manifest.json + lock dei pacchetti
-ProjectSettings/   # Impostazioni progetto Unity
+  Scenes/       # Menu, Stage1 … Stage7
+  Scripts/
+    menu/       # Menu principale, impostazioni (volumi), logo
+    Stage1-7/   # Gameplay ed effetti di ogni stadio
+    Audio/      # Gestione suoni e musica
+    StageScript.cs      # Barra di progresso e passaggio allo stadio successivo
+    SceneFadeScript.cs  # Dissolvenze e schermo bianco tra gli stadi
+  Prefabs/      # Pianeti, buchi neri, asteroidi, molecole…
+  Sprites/      # Pixel art
+  Sounds/       # Effetti e musica
+  Shaders/
+  Settings/     # URP, Input System, build profile
+Packages/
+ProjectSettings/
 ```
 
 ---
 
-## Roadmap
+## Crediti
 
-- [ ] **M0 – Fondamenta:** struttura del progetto, menu, gestione di scene e stadi, input
-- [ ] **M1 – Primo stadio:** Absolute giocabile dall'inizio alla fine
-- [ ] **M2 – Discesa:** transizione di entità tra uno stadio e il successivo
-- [ ] **M3 – Stadi intermedi:** un gameplay diverso per ogni entità della scala
-- [ ] **M4 – Stadio finale:** l'entità instabile e la corruzione delle regole
-- [ ] **M5 – Storia:** narrativa e chiusura del gioco
-- [ ] **M6 – Audio & feel:** musica, effetti e resa visiva di ogni scala
-
----
+Creato da **NeuronsLimited Studios**.
 
 ## Licenza
 
-Nessuna licenza definita — tutti i diritti riservati fino a decisione contraria.
+© 2026 NeuronsLimited Studios. **Tutti i diritti riservati.**
+
+Il codice e gli asset sono pubblici solo per essere **consultati**. Non è consentito
+copiare, modificare, ridistribuire o pubblicare versioni modificate del progetto, in tutto
+o in parte, senza il permesso scritto di NeuronsLimited Studios. Dettagli in [LICENSE](LICENSE).
